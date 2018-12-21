@@ -1,83 +1,68 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>test 2</title>
+    <title>RPG Game</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">  
-  </head>
-  <body>
+</head>
+<body>
     <div id="wrapper">
-          
-<!-- for char select, look at test 3.html. do on-hover event for dynamic bg if time. -->
-
-
         <!-- =======START OF HEROSELECT======= -->
         <div id="heroSelect">
-            <h2>heroSelect</h2>
-            <img id="A" height="130px" width="130px">
-            <img id="B" height="130px" width="130px">
-            <img id="C" height="130px" width="130px">
-            <img id="D" height="130px" width="130px">
-
+            <h2>Choose your Pokemon!</h2>
+            <img id="A" class="heroes" height="130px" width="130px">
+            <img id="B" class="heroes" height="130px" width="130px">
+            <img id="C" class="heroes" height="130px" width="130px">
+            <img id="D" class="heroes" height="130px" width="130px">
         </div>
-
         <!-- =======END OF HEROSELECT======= -->
 
         <!-- =======START OF ENEMYSELECT======= -->
-
         <div id="enemySelect">
-            <h2>enemySelect</h2>
+            <h2>Choose your opponent!</h2>
+            <img id="E" class="enemies" height="130px" width="130px">
+            <img id="F" class="enemies" height="130px" width="130px">
+            <img id="G" class="enemies" height="130px" width="130px">
+            <img id="H" class="enemies" height="130px" width="130px">
         </div>
-
         <!-- =======END OF ENEMYSELECT======= -->
 
         <!-- =======START OF ENCOUNTER======= -->
-
-        <!-- <div id="enemyEncounter">
-            <h2>enemyEncounter</h2>
-        </div> -->
-
-        <!-- =======END OF ENCOUNTER======= -->
-
         <div id="#enemyEncounterChallenge">
             <h2 id="enemyEncounterWords"></h2>
             <img id="enemyEncounterImg">
         </div>
-        <!-- =======START OF ARENA======= -->
+        <!-- =======END OF ENCOUNTER======= -->
 
+
+        <!-- =======START OF ARENA======= -->
         <div id="arena">
-            <div id="enemyCharElement">
+            <div id="enemyArenaElement">
                 <h3 id="enemyHP">HP: </h3> 
                 <img id="enemyImg" class="enemyAnimIn enemyAnimOut">    
-                
             </div>
-            <div id="heroCharElement">
+            
+            <div id="heroArenaElement">
                 <h3 id="heroHP">HP: </h3>
                 <img id="heroImg">
                 <button class="attack-btn">
-                <span class="attackBoost"></span> ATTACK</button>
-                <!-- ^needs more -->  
+                <span class="attackBoost"></span> ATTACK</button> 
             </div>
         </div>
-
         <!-- =======END OF ARENA======= -->
 
         <!-- =======START OF WINORLOSE======= -->
-
-        <!-- <div id="winOrLose">
+        <div id="winOrLose">
             <h2>winOrLose</h2>
-        </div> -->
-
-            <!-- =======END OF WINORLOSE======= -->
         </div>
-        
+            <!-- =======END OF WINORLOSE======= -->
+    </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <script type="text/javascript">
         
         var characterBulbasaur = {
-            characterName: "Bulbasaur",
+            name: "Bulbasaur",
             currentHitPoints: 5,    //change this in arenaChar
             hitPoints: 100,
             attackPower: 6,         //this will go up my its base attack power
@@ -88,10 +73,9 @@
             backImg: "assets/images/bulbasaur2.gif",
             profileImg: "assets/images/bulbasaur-profile.png"
         };
-        
-        
+
         var characterPorygon2 = {
-            characterName: "Porygon2",
+            name: "Porygon2",
             currentHitPoints: 5,    //change this in arenaChar
             hitPoints: 130,
             attackPower: 10,         //this will go up my its base attack power
@@ -103,8 +87,8 @@
             profileImg: "assets/images/porygon2-profile.png",
         };
 
-        var characteGengar = {
-            characterName: "Gengar",
+        var characterGengar = {
+            name: "Gengar",
             currentHitPoints: 5,    //change this in arenaChar
             hitPoints: 170,
             attackPower: 14,         //this will go up my its base attack power
@@ -117,7 +101,7 @@
         };
 
         var characterMewtwo = {
-            characterName: "Mewtwo",
+            name: "Mewtwo",
             currentHitPoints: 5,    //change this in arenaChar
             hitPoints: 200,
             attackPower: 18,         //this will go up my its base attack power
@@ -128,47 +112,126 @@
             backImg: "assets/images/mewtwo2.gif",
             profileImg: "assets/images/mewtwo-profile.png"
         };
+
+        var char = [];
+        char[0] = characterBulbasaur;
+        char[1] = characterPorygon2;
+        char[2] = characterGengar;
+        char[3] = characterMewtwo;
         var enemyChar;
         var heroChar;
+        var getHero;
+        var getOpponent;  
+        var battle;
+        var hideScenes;
 
-        // =======================
+        hideScenes = function() {
+            $("#arena").hide("#arena"); 
+            $("#heroSelect").hide("#heroSelect");
+            $("#enemySelect").hide("#enemySelect");  
+            $("#enemyEncounterChallenge").hide("#enemyEncounterChallenge");  
+            $("#winOrLose").hide("#winOrLose");
+        }
 
+        getHero = function() {
+            $("#heroSelect").show("#heroSelect");       
+            $("#A").attr("src", char[0].profileImg);
+            $("#B").attr("src", char[1].profileImg);
+            $("#C").attr("src", char[2].profileImg);
+            $("#D").attr("src", char[3].profileImg);
 
-        $("#enemyImg").attr("src", characterPorygon2.frontImg);
-            //need to pull from object, not online
-        $("#enemyHP").prepend("Enemy " + characterPorygon2.characterName +  "\'s ").append(characterPorygon2.currentHitPoints).append("/").append(characterPorygon2.hitPoints);
-        // the total HP and current
-        $("#heroImg").attr("src", characterMewtwo.backImg);
-        $("#heroHP").prepend(characterMewtwo.characterName +  "\'s ").append(characterMewtwo.currentHitPoints).append("/").append(characterMewtwo.hitPoints);
+            $("#A").on("click", function() {
+                heroChar = char[0];
+                alert("You choose " + heroChar.name + "!");
+                return heroChar;
+            });
+
+            $("#B").on("click", function() {
+                heroChar = char[1];
+                alert("You choose " + heroChar.name + "!");
+                return heroChar;
+            });
+
+            $("#C").on("click", function() {
+                heroChar = char[2];
+                alert("You choose " + heroChar.name + "!");
+                return heroChar;
+            });
+
+            $("#D").on("click", function() {
+                heroChar = char[3];
+                alert("You choose " + heroChar.name + "!");
+                return heroChar;
+            });
+
+            $(".heroes").on("click", function() {
+                $("#heroSelect").hide("#heroSelect"); 
+            });
+        }
+
+        getOpponent = function() {
+            $("#heroSelect").hide("#heroSelect");
+            $("#enemySelect").show("#enemySelect"); 
+            $("#E").attr("src", char[0].profileImg);
+            $("#F").attr("src", char[1].profileImg);
+            $("#G").attr("src", char[2].profileImg);
+            $("#H").attr("src", char[3].profileImg);
+
+            $("#E").on("click", function() {
+                enemyChar = char[0];
+                alert("Your enemy is  " + enemyChar.name + "!");
+                return enemyChar;
+            });
+
+            $("#F").on("click", function() {
+                enemyChar = char[1];
+                alert("Your enemy is  " + enemyChar.name + "!");
+                return enemyChar;
+            });
+
+            $("#G").on("click", function() {
+                enemyChar = char[2];
+                alert("Your enemy is  " + enemyChar.name + "!");
+                return enemyChar;
+            });
+
+            $("#H").on("click", function() {
+                enemyChar = char[3];
+                alert("Your enemy is  " + enemyChar.name + "!");
+                return enemyChar;
+            });
+
+            $(".enemies").on("click", function() {
+                $("#enemySelect").hide("#enemySelect"); 
+                $("#enemyEncounter").show("#enemyEncounter");         
+                $("#enemyEncounterWords").append("Enemy " + enemyChar.name + " challenges you!");
+                $("#enemyEncounterImg").attr("src", enemyChar.profileImg);
+                
+            });
+        }
+
+        battle = function(){
+            // =============ARENA STUFF==========
+            $("#enemyEncounter").hide("#enemyEncounter");
+            $("#arena").show("#arena");   
+            $("#enemyImg").attr("src", char[1].frontImg);
+            $("#enemyHP").prepend("Enemy " + char[1].name +  "\'s ").append(char[1].currentHitPoints).append("/").append(characterPorygon2.hitPoints);
+            $("#heroImg").attr("src", char[3].backImg);
+            $("#heroHP").prepend(char[3].name +  "\'s ").append(char[3].currentHitPoints).append("/").append(char[3].hitPoints);
+        // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
+        }
+
+        hideScenes();
+        getHero();
+        getOpponent();
+        battle();
         
-        $("#arena").show("#arena");     //YES, this is what I want
-        $("#heroSelect").hide("#heroSelect");
-        $("#enemySelect").hide("#enemySelect");  
-        $("#enemyEncounter").hide("#enemyEncounter");  
-        $("#winOrLose").hide("#winOrLose");
 
-        // IF statement right here for which of the 4 pages to show
-
-        // if (heroChar == null) {
-        //     $("#heroSelect").hide("#heroSelect");       //change to show
-        //     $("#A").attr("src", characterBulbasaur.profileImg);
-        //     $("#B").attr("src", characterPorygon2.profileImg);
-        //     $("#C").attr("src", characterGengar.profileImg);
-        //     $("#D").attr("src", characterMewtwo.profileImg);
-        // }
-        
-        // if (heroChar !== null) {
-        //     $("#enemyEncounter").show("#enemyEncounter");         //change to show
-        //     //show character here, zooming in, maybe
-        //     $("#enemyEncounterWords").append("Enemy " + characterPorygon2.characterName + "challenges you!");
-        //     $("#enemyEncounterImg").attr("src", "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png");
-
-        // }
 
 
 // <!-- // USE THISSSSSSSSSSSS -->
 
-        </script>
+    </script>
     
-  </body>
+</body>
 </html>
