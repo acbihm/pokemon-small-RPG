@@ -74,6 +74,8 @@ body {
     position: absolute;
     top: 20px;
     background-image: url(../images/arenaBG.gif);
+    background-size:  cover;
+    background-position: -90px 0px;
     border-style: solid;
     border-color: white;;
     border-width: 1px;
@@ -88,6 +90,8 @@ body {
     position: absolute;
     top: 20px;
     background-image: url(../images/victory.gif);
+    background-size:  cover;
+    background-position: -90px 0px;
     border-style: solid;
     border-color: white;;
     border-width: 1px;
@@ -106,8 +110,7 @@ h1, h2, h3 {
 }
 
 #enemyImg {
-        -webkit-filter: 
-        drop-shadow(1px -7px 7px #dd2323);  
+        -webkit-filter: drop-shadow(1px -7px 7px #dd2323);  
 }
 
 #enemyHP {
@@ -125,8 +128,7 @@ h1, h2, h3 {
 }
 
 #heroImg {
-    -webkit-filter: 
-        drop-shadow(2px -7px 7px #135fd8);  
+    -webkit-filter: drop-shadow(2px -7px 7px #135fd8);  
 }
 
 #heroHP {
@@ -150,20 +152,16 @@ h1, h2, h3 {
 }
 .attack-btn:hover {
     border-style: solid;
-    /* border-color: white; */
-    border-width: 3px;
-    
+    border-width: 3px;  
     font-weight: bolder;
-    /* padding: 1.6em; */
     background-image: url(../images/dynamic.gif);
     box-shadow: 2px 2px 2px grey
 
-    /* maybe change the intensity of it in PS? */
 }
 
 /* ==================SELECT CHAR===== */
 
-  
+
 
 
 
