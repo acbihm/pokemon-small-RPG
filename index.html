@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>test 2</title>
-    <link rel="stylesheet" type="text/css" href="test.css">  
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">  
   </head>
   <body>
     <div id="wrapper">
@@ -33,11 +33,12 @@
 
         <!-- =======START OF ENCOUNTER======= -->
 
-        <div id="enemyEncounter">
+        <!-- <div id="enemyEncounter">
             <h2>enemyEncounter</h2>
-        </div>
+        </div> -->
 
         <!-- =======END OF ENCOUNTER======= -->
+
         <div id="#enemyEncounterChallenge">
             <h2 id="enemyEncounterWords"></h2>
             <img id="enemyEncounterImg">
@@ -48,7 +49,7 @@
             <div id="enemyCharElement">
                 <h3 id="enemyHP">HP: </h3> 
                 <img id="enemyImg" class="enemyAnimIn enemyAnimOut">    
-                <!-- ^needs update -->
+                
             </div>
             <div id="heroCharElement">
                 <h3 id="heroHP">HP: </h3>
@@ -62,9 +63,11 @@
         <!-- =======END OF ARENA======= -->
 
         <!-- =======START OF WINORLOSE======= -->
-        <div id="winOrLose">
-                <h2>winOrLose</h2>
-            </div>
+
+        <!-- <div id="winOrLose">
+            <h2>winOrLose</h2>
+        </div> -->
+
             <!-- =======END OF WINORLOSE======= -->
         </div>
         
@@ -81,9 +84,9 @@
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 10,          //for now it iwll be 20
             difficultyRating: "Easy",        //for now, might put it in stars
-            frontImg: "/assrts/",
-            backImg: "http://www.pokestadium.com/sprites/xy/back/bulbasaur.gif",
-            profileImg: "bulbasaur (1).gif"
+            frontImg: "assets/images/bulbasaur1.gif",
+            backImg: "assets/images/bulbasaur2.gif",
+            profileImg: "assets/images/bulbasaur-profile.png"
         };
         
         
@@ -95,9 +98,9 @@
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 15,          //for now it iwll be 20
             difficultyRating: "Hard",        //for now, might put it in stars
-            frontImg: "http://www.pokestadium.com/sprites/xy/porygon2.gif",
-            backImg: "http://www.pokestadium.com/sprites/xy/back/porygon2.gif",
-            profileImg: "https://cdn.bulbagarden.net/upload/thumb/9/99/233Porygon2.png/250px-233Porygon2.png"
+            frontImg: "assets/images/porygon21.gif",
+            backImg: "assets/images/porygon22.gif",
+            profileImg: "assets/images/porygon2-profile.png",
         };
 
         var characteGengar = {
@@ -108,9 +111,9 @@
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 20,          //for now it iwll be 20
             difficultyRating: "Very Hard",        //for now, might put it in stars
-            frontImg: "http://www.pokestadium.com/sprites/xy/gengar.gif",
-            backImg: "http://www.pokestadium.com/sprites/xy/back/gengar.gif",
-            profileImg: "https://cdn.bulbagarden.net/upload/thumb/c/c6/094Gengar.png/250px-094Gengar.png"
+            frontImg: "assets/images/gengar1.gif",
+            backImg: "assets/images/gengar2.gif",
+            profileImg: "assets/images/gengar-profile.png"
         };
 
         var characterMewtwo = {
@@ -121,9 +124,9 @@
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 25,          //for now it iwll be 20
             difficultyRating: "Master",        //for now, might put it in stars
-            frontImg: "http://www.pokestadium.com/sprites/xy/mewtwo.gif",
-            backImg: "http://www.pokestadium.com/sprites/xy/back/mewtwo.gif",
-            profileImg: "https://cdn.bulbagarden.net/upload/thumb/7/78/150Mewtwo.png/250px-150Mewtwo.png"
+            frontImg: "assets/images/mewtwo1.gif",
+            backImg: "assets/images/mewtwo2.gif",
+            profileImg: "assets/images/mewtwo-profile.png"
         };
         var enemyChar;
         var heroChar;
@@ -131,35 +134,36 @@
         // =======================
 
 
-        $("#enemyImg").attr("src", "http://www.pokestadium.com/sprites/xy/porygon2.gif");
+        $("#enemyImg").attr("src", characterPorygon2.frontImg);
             //need to pull from object, not online
         $("#enemyHP").prepend("Enemy " + characterPorygon2.characterName +  "\'s ").append(characterPorygon2.currentHitPoints).append("/").append(characterPorygon2.hitPoints);
-        //show the total HP and current
-        $("#heroImg").attr("src", "https://vignette.wikia.nocookie.net/pokemon/images/c/c6/Mewtwo_XY_Back_Sprite.gif");
+        // the total HP and current
+        $("#heroImg").attr("src", characterMewtwo.backImg);
         $("#heroHP").prepend(characterMewtwo.characterName +  "\'s ").append(characterMewtwo.currentHitPoints).append("/").append(characterMewtwo.hitPoints);
         
-        $("#arena").hide("#arena");     //YES, this is what I want
+        $("#arena").show("#arena");     //YES, this is what I want
         $("#heroSelect").hide("#heroSelect");
         $("#enemySelect").hide("#enemySelect");  
         $("#enemyEncounter").hide("#enemyEncounter");  
         $("#winOrLose").hide("#winOrLose");
+
         // IF statement right here for which of the 4 pages to show
 
-        if (heroChar == null) {
-            $("#heroSelect").hide("#heroSelect");       //change to show
-            $("#A").attr("src", "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png");
-            $("#B").attr("src", "https://cdn.bulbagarden.net/upload/thumb/9/99/233Porygon2.png/250px-233Porygon2.png");
-            $("#C").attr("src", "https://cdn.bulbagarden.net/upload/thumb/c/c6/094Gengar.png/250px-094Gengar.png");
-            $("#D").attr("src", "https://cdn.bulbagarden.net/upload/thumb/7/78/150Mewtwo.png/250px-150Mewtwo.png");
-        }
+        // if (heroChar == null) {
+        //     $("#heroSelect").hide("#heroSelect");       //change to show
+        //     $("#A").attr("src", characterBulbasaur.profileImg);
+        //     $("#B").attr("src", characterPorygon2.profileImg);
+        //     $("#C").attr("src", characterGengar.profileImg);
+        //     $("#D").attr("src", characterMewtwo.profileImg);
+        // }
         
-        if (heroChar !== null) {
-            $("#enemyEncounter").show("#enemyEncounter");         //change to show
-            //show character here, zooming in, maybe
-            $("#enemyEncounterWords").append("Enemy " + characterPorygon2.characterName + "challenges you!");
-            $("#enemyEncounterImg").attr("src", "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png");
+        // if (heroChar !== null) {
+        //     $("#enemyEncounter").show("#enemyEncounter");         //change to show
+        //     //show character here, zooming in, maybe
+        //     $("#enemyEncounterWords").append("Enemy " + characterPorygon2.characterName + "challenges you!");
+        //     $("#enemyEncounterImg").attr("src", "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png");
 
-        }
+        // }
 
 
 // <!-- // USE THISSSSSSSSSSSS -->
