@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>test 2</title>
+    <link rel="stylesheet" type="text/css" href="test.css">  
+  </head>
+  <body>
+    <div id="wrapper">
+          
+<!-- for char select, look at test 3.html. do on-hover event for dynamic bg if time. -->
+
+
+        <!-- =======START OF HEROSELECT======= -->
+        <div id="heroSelect">
+            <h2>heroSelect</h2>
+            <img id="A" height="130px" width="130px">
+            <img id="B" height="130px" width="130px">
+            <img id="C" height="130px" width="130px">
+            <img id="D" height="130px" width="130px">
+
+        </div>
+
+        <!-- =======END OF HEROSELECT======= -->
+
+        <!-- =======START OF ENEMYSELECT======= -->
+
+        <div id="enemySelect">
+            <h2>enemySelect</h2>
+        </div>
+
+        <!-- =======END OF ENEMYSELECT======= -->
+
+        <!-- =======START OF ENCOUNTER======= -->
+
+        <div id="enemyEncounter">
+            <h2>enemyEncounter</h2>
+        </div>
+
+        <!-- =======END OF ENCOUNTER======= -->
+        <div id="#enemyEncounterChallenge">
+            <h2 id="enemyEncounterWords"></h2>
+            <img id="enemyEncounterImg">
+        </div>
+        <!-- =======START OF ARENA======= -->
+
+        <div id="arena">
+            <div id="enemyCharElement">
+                <h3 id="enemyHP">HP: </h3> 
+                <img id="enemyImg" class="enemyAnimIn enemyAnimOut">    
+                <!-- ^needs update -->
+            </div>
+            <div id="heroCharElement">
+                <h3 id="heroHP">HP: </h3>
+                <img id="heroImg">
+                <button class="attack-btn">
+                <span class="attackBoost"></span> ATTACK</button>
+                <!-- ^needs more -->  
+            </div>
+        </div>
+
+        <!-- =======END OF ARENA======= -->
+
+        <!-- =======START OF WINORLOSE======= -->
+        <div id="winOrLose">
+                <h2>winOrLose</h2>
+            </div>
+            <!-- =======END OF WINORLOSE======= -->
+        </div>
+        
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        
+        var characterBulbasaur = {
+            characterName: "Bulbasaur",
+            currentHitPoints: 5,    //change this in arenaChar
+            hitPoints: 100,
+            attackPower: 6,         //this will go up my its base attack power
+            baseAttackIncrement: 6,     //for now, it will be 6
+            counterAttack: 10,          //for now it iwll be 20
+            difficultyRating: "Easy",        //for now, might put it in stars
+            frontImg: "/assrts/",
+            backImg: "http://www.pokestadium.com/sprites/xy/back/bulbasaur.gif",
+            profileImg: "bulbasaur (1).gif"
+        };
+        
+        
+        var characterPorygon2 = {
+            characterName: "Porygon2",
+            currentHitPoints: 5,    //change this in arenaChar
+            hitPoints: 130,
+            attackPower: 10,         //this will go up my its base attack power
+            baseAttackIncrement: 6,     //for now, it will be 6
+            counterAttack: 15,          //for now it iwll be 20
+            difficultyRating: "Hard",        //for now, might put it in stars
+            frontImg: "http://www.pokestadium.com/sprites/xy/porygon2.gif",
+            backImg: "http://www.pokestadium.com/sprites/xy/back/porygon2.gif",
+            profileImg: "https://cdn.bulbagarden.net/upload/thumb/9/99/233Porygon2.png/250px-233Porygon2.png"
+        };
+
+        var characteGengar = {
+            characterName: "Gengar",
+            currentHitPoints: 5,    //change this in arenaChar
+            hitPoints: 170,
+            attackPower: 14,         //this will go up my its base attack power
+            baseAttackIncrement: 6,     //for now, it will be 6
+            counterAttack: 20,          //for now it iwll be 20
+            difficultyRating: "Very Hard",        //for now, might put it in stars
+            frontImg: "http://www.pokestadium.com/sprites/xy/gengar.gif",
+            backImg: "http://www.pokestadium.com/sprites/xy/back/gengar.gif",
+            profileImg: "https://cdn.bulbagarden.net/upload/thumb/c/c6/094Gengar.png/250px-094Gengar.png"
+        };
+
+        var characterMewtwo = {
+            characterName: "Mewtwo",
+            currentHitPoints: 5,    //change this in arenaChar
+            hitPoints: 200,
+            attackPower: 18,         //this will go up my its base attack power
+            baseAttackIncrement: 6,     //for now, it will be 6
+            counterAttack: 25,          //for now it iwll be 20
+            difficultyRating: "Master",        //for now, might put it in stars
+            frontImg: "http://www.pokestadium.com/sprites/xy/mewtwo.gif",
+            backImg: "http://www.pokestadium.com/sprites/xy/back/mewtwo.gif",
+            profileImg: "https://cdn.bulbagarden.net/upload/thumb/7/78/150Mewtwo.png/250px-150Mewtwo.png"
+        };
+        // https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+        // https://cdn.bulbagarden.net/upload/thumb/6/6b/137Porygon.png/250px-137Porygon.png
+        // https://cdn.bulbagarden.net/upload/thumb/8/8b/149Dragonite.png/250px-149Dragonite.png
+        var enemyChar;
+        var heroChar;
+
+        // =======================
+
+
+        $("#enemyImg").attr("src", "http://www.pokestadium.com/sprites/xy/porygon2.gif");
+            //need to pull from object, not online
+        $("#enemyHP").prepend("Enemy " + characterPorygon2.characterName +  "\'s ").append(characterPorygon2.currentHitPoints).append("/").append(characterPorygon2.hitPoints);
+        //show the total HP and current
+        $("#heroImg").attr("src", "https://vignette.wikia.nocookie.net/pokemon/images/c/c6/Mewtwo_XY_Back_Sprite.gif");
+        $("#heroHP").prepend(characterMewtwo.characterName +  "\'s ").append(characterMewtwo.currentHitPoints).append("/").append(characterMewtwo.hitPoints);
+        
+        $("#arena").hide("#arena");     //YES, this is what I want
+        $("#heroSelect").hide("#heroSelect");
+        $("#enemySelect").hide("#enemySelect");  
+        $("#enemyEncounter").hide("#enemyEncounter");  
+        $("#winOrLose").hide("#winOrLose");
+        // IF statement right here for which of the 4 pages to show
+
+        if (heroChar == null) {
+            $("#heroSelect").hide("#heroSelect");       //change to show
+            $("#A").attr("src", "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png");
+            $("#B").attr("src", "https://cdn.bulbagarden.net/upload/thumb/9/99/233Porygon2.png/250px-233Porygon2.png");
+            $("#C").attr("src", "https://cdn.bulbagarden.net/upload/thumb/c/c6/094Gengar.png/250px-094Gengar.png");
+            $("#D").attr("src", "https://cdn.bulbagarden.net/upload/thumb/7/78/150Mewtwo.png/250px-150Mewtwo.png");
+        }
+        
+        if (heroChar !== null) {
+            $("#enemyEncounter").show("#enemyEncounter");         //change to show
+            //show character here, zooming in, maybe
+            $("#enemyEncounterWords").append("Enemy " + characterPorygon2.characterName + "challenges you!");
+            $("#enemyEncounterImg").attr("src", "https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png");
+
+        }
+
+
+// <!-- // USE THISSSSSSSSSSSS -->
+
+        </script>
+    
+  </body>
+</html>
