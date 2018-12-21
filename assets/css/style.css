@@ -20,7 +20,7 @@ body {
     width: 598px;
     position: absolute;
     top: 20px;
-    background-image: url(https://media.giphy.com/media/qrC9zVsAkKP5K/source.gif);
+    background-image: url(../images/arenaBG.gif);
     border-style: solid;
     border-color: white;;
     border-width: 1px;
@@ -35,7 +35,7 @@ body {
     width: 598px;
     position: absolute;
     top: 20px;
-    /* background-image: url(https://media.giphy.com/media/qrC9zVsAkKP5K/source.gif); */
+    /* background-image: url(../images/arenaBG.gif); */
     border-style: solid;
     border-color: white;;
     border-width: 1px;
@@ -48,7 +48,7 @@ body {
     width: 598px;
     position: absolute;
     top: 20px;
-    /* background-image: url(https://media.giphy.com/media/qrC9zVsAkKP5K/source.gif); */
+    /* background-image: url(../images/arenaBG.gif); */
     border-style: solid;
     border-color: white;;
     border-width: 1px;
@@ -64,14 +64,14 @@ body {
     left: 9px;
     z-index: 2;
     text-align: center;
-    background-image: url(https://thumbs.gfycat.com/ExemplaryBreakableAfricanhornbill-small.gif);
+    background-image: url(../images/encounter.gif);
     background-size:  cover;
     background-position: -90px 0px;
 
 /* =======maybe just do this in JS? and put the image there in enemyEncounter */
 
     /* top: 20px; */
-    /* background-image: url(https://i.makeagif.com/media/11-26-2015/3UZrdX.gif); */
+    /* background-image: url(../images/victory.gif); */
     /* border-style: solid; */
     /* border-color: white;; */
     /* border-width: 1px; */
@@ -84,7 +84,7 @@ body {
     width: 598px;
     position: absolute;
     top: 20px;
-    background-image: url(https://i.makeagif.com/media/11-26-2015/3UZrdX.gif);
+    background-image: url(../images/victory.gif);
     border-style: solid;
     border-color: white;;
     border-width: 1px;
@@ -149,8 +149,7 @@ body {
     
     font-weight: bolder;
     /* padding: 1.6em; */
-    /* background-image: url("https://thumbs.gfycat.com/OrdinaryUnkemptHornbill-max-1mb.gif") */
-    background-image: url(dynamic.gif);
+    background-image: url(../images/dynamic.gif);
     box-shadow: 2px 2px 2px grey
 
     /* maybe change the intensity of it in PS? */
@@ -183,7 +182,7 @@ body {
     -moz-transform: scale(1.2);
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
-    /* background-image: url("dynamic.gif"); */
+    /* background-image: url(../images/dynamic.gif); */
   }
   
   .charSelect h3 {
@@ -197,7 +196,7 @@ body {
     color: #ffffff;
     text-align: center;
     background: #4aaaa5;
-    /* background-image: url("/dynamic.gif"); */
+    /* background-image: url(../images/dynamic.gif); */
     border-bottom: 0;
   }
   
