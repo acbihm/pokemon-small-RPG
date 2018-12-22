@@ -3,43 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>RPG Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">  
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">  
 </head>
 <body>
     <div id="wrapper">
 
         <!-- ==============CHARACTER SELECTION============== -->
 
-        <div id="heroSelect" class="select">
+        <div id="heroSelect" class="gameArea">
             <h1>Choose your Pokemon!</h1>
-            <img id="A" class="heroes" height="130px" width="130px">
-            <img id="B" class="heroes" height="130px" width="130px">
-            <img id="C" class="heroes" height="130px" width="130px">
-            <img id="D" class="heroes" height="130px" width="130px">
         </div>
-
 
         <!-- ==============OPPONENT SELECTION============== -->
 
-        <div id="enemySelect">
+        <div id="enemySelect" class="gameArea">
             <h1>Choose your opponent!</h1>
-            <img id="E" class="enemies" height="130px" width="130px">
-            <img id="F" class="enemies" height="130px" width="130px">
-            <img id="G" class="enemies" height="130px" width="130px">
-            <img id="H" class="enemies" height="130px" width="130px">
         </div>
 
         <!-- ==============OPPONENT ENCOUNTER============== -->
 
-        <div id="#enemyEncounterChallenge">
-            <h1 id="enemyEncounterWords"></h1>
-            <img id="enemyEncounterImg">
+        <div id="encounter" class="gameArea">
+            <h1 id="encounterWords"></h1>
+            <img id="encounterImg">
         </div>
-
 
         <!-- ==============BATTLE============== -->
         
-        <div id="arena">
+        <div id="arena" class="gameArea">
             <div id="enemyArenaElement">
                 <h3 id="enemyHP">HP: </h3> 
                 <img id="enemyImg" class="enemyAnimIn enemyAnimOut">    
@@ -47,19 +37,16 @@
             <div id="heroArenaElement">
                 <h3 id="heroHP">HP: </h3>
                 <img id="heroImg">
-                <button class="attack-btn">
-                <span class="attackBoost"></span> ATTACK</button> 
+                <button id="attack-btn">
+                <span class="attackBoost"></span>ATTACK</button> 
             </div>
         </div>
 
-
         <!-- ==============RESULTS============== -->
 
-        <div id="winOrLose">
+        <div id="winOrLose" class="gameArea">
             <h1>RESULTS</h1>
         </div>
-    </div>
-
 
         <!-- ==============JAVASCRIPT============== -->
 
@@ -73,10 +60,10 @@
             attackPower: 6,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 10,          //for now it iwll be 20
-            difficultyRating: "Easy",        //for now, might put it in stars
+            difficulty: "Easy",        //for now, might put it in stars
             frontImg: "assets/images/bulbasaur1.gif",
             backImg: "assets/images/bulbasaur2.gif",
-            profileImg: "assets/images/bulbasaur-profile.png"
+            profImg: "assets/images/bulbasaur-profile.png"
         };
 
         var characterPorygon2 = {
@@ -86,10 +73,10 @@
             attackPower: 10,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 15,          //for now it iwll be 20
-            difficultyRating: "Hard",        //for now, might put it in stars
+            difficulty: "Hard",        //for now, might put it in stars
             frontImg: "assets/images/porygon21.gif",
             backImg: "assets/images/porygon22.gif",
-            profileImg: "assets/images/porygon2-profile.png",
+            profImg: "assets/images/porygon2-profile.png",
         };
 
         var characterGengar = {
@@ -99,10 +86,10 @@
             attackPower: 14,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 20,          //for now it iwll be 20
-            difficultyRating: "Very Hard",        //for now, might put it in stars
+            difficulty: "Very Hard",        //for now, might put it in stars
             frontImg: "assets/images/gengar1.gif",
             backImg: "assets/images/gengar2.gif",
-            profileImg: "assets/images/gengar-profile.png"
+            profImg: "assets/images/gengar-profile.png"
         };
 
         var characterMewtwo = {
@@ -112,10 +99,10 @@
             attackPower: 18,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
             counterAttack: 25,          //for now it iwll be 20
-            difficultyRating: "Master",        //for now, might put it in stars
+            difficulty: "Master",        //for now, might put it in stars
             frontImg: "assets/images/mewtwo1.gif",
             backImg: "assets/images/mewtwo2.gif",
-            profileImg: "assets/images/mewtwo-profile.png"
+            profImg: "assets/images/mewtwo-profile.png"
         };
 
         var char = [];
@@ -127,43 +114,51 @@
         var heroChar;
         var getHero;
         var getOpponent;  
+        var challenge;
         var battle;
         var hideScenes;
+        $("#heroSelect").show("#heroSelect");
 
         hideScenes = function() {
-            $("#arena").hide("#arena"); 
             $("#heroSelect").hide("#heroSelect");
             $("#enemySelect").hide("#enemySelect");  
-            $("#enemyEncounterChallenge").hide("#enemyEncounterChallenge");  
+            $("#encounter").hide("#encounter");
+            $("#arena").hide("#arena"); 
             $("#winOrLose").hide("#winOrLose");
         }
 
         getHero = function() {
-            $("#heroSelect").show("#heroSelect");       
-            $("#A").attr("src", char[0].profileImg);
-            $("#B").attr("src", char[1].profileImg);
-            $("#C").attr("src", char[2].profileImg);
-            $("#D").attr("src", char[3].profileImg);
+            hideScenes();
+            $("#heroSelect").show("#heroSelect");
+            for (var i = 0; i <= 3; i++) {
+                var hero = $("<img>");
+                hero.addClass("heroes");
+                hero.attr('src', char[i].profImg);
+                hero.attr('width', "130px");
+                hero.attr('height', "130px");
+                hero.attr('id', 'heroID' + i);
+                $("#heroSelect").append(hero);
+            }     
 
-            $("#A").on("click", function() {
+            $("#heroID0").on("click", function() {
                 heroChar = char[0];
                 alert("You choose " + heroChar.name + "!");
                 return heroChar;
             });
 
-            $("#B").on("click", function() {
+            $("#heroID1").on("click", function() {
                 heroChar = char[1];
                 alert("You choose " + heroChar.name + "!");
                 return heroChar;
             });
 
-            $("#C").on("click", function() {
+            $("#heroID2").on("click", function() {
                 heroChar = char[2];
                 alert("You choose " + heroChar.name + "!");
                 return heroChar;
             });
 
-            $("#D").on("click", function() {
+            $("#heroID3").on("click", function() {
                 heroChar = char[3];
                 alert("You choose " + heroChar.name + "!");
                 return heroChar;
@@ -172,54 +167,71 @@
             $(".heroes").on("click", function() {
                 $("#heroSelect").hide("#heroSelect"); 
             });
+
+            // do an if else statement here, IF heroChar == null, do getHero, then outside, do getOpponent
+            getOpponent();
         }
 
         getOpponent = function() {
-            $("#heroSelect").hide("#heroSelect");
-            $("#enemySelect").show("#enemySelect"); 
-            $("#E").attr("src", char[0].profileImg);
-            $("#F").attr("src", char[1].profileImg);
-            $("#G").attr("src", char[2].profileImg);
-            $("#H").attr("src", char[3].profileImg);
+            // $("#heroSelect").hide("#heroSelect");
+            $("#enemySelect").show("#enemySelect");
+            // $("enemySelect").append("<h1>Choose your opponent!</h1>");
+            //cant get this to work
+            
 
-            $("#E").on("click", function() {
+
+            for (var i = 0; i <= 3; i++) {
+                var enemy = $("<img>");
+                enemy.addClass('enemies');
+                enemy.attr('src', char[i].profImg);
+                enemy.attr('width', "130px");
+                enemy.attr('height', "130px");
+                enemy.attr('id', 'enemyID' + i);
+                $("#enemySelect").append(enemy);
+            }     
+
+            $("#enemyID0").on("click", function() {
                 enemyChar = char[0];
-                alert("Your enemy is  " + enemyChar.name + "!");
+                alert("Your enemy is " + enemyChar.name + "!");
                 return enemyChar;
             });
 
-            $("#F").on("click", function() {
+            $("#enemyID1").on("click", function() {
                 enemyChar = char[1];
-                alert("Your enemy is  " + enemyChar.name + "!");
+                alert("Your enemy is " + enemyChar.name + "!");
                 return enemyChar;
             });
 
-            $("#G").on("click", function() {
+            $("#enemyID2").on("click", function() {
                 enemyChar = char[2];
-                // $("enemySelect").after("<br><br><h2> Your enemy is " + enemyChar.name + "!</h2>");
-//  ====================KEEP THIS
-                alert("Your enemy is  " + enemyChar.name + "!");
+                alert("Your enemy is " + enemyChar.name + "!");
                 return enemyChar;
             });
 
-            $("#H").on("click", function() {
+            $("#enemyID3").on("click", function() {
                 enemyChar = char[3];
-                alert("Your enemy is  " + enemyChar.name + "!");
+                alert("Your enemy is " + enemyChar.name + "!");
                 return enemyChar;
             });
 
             $(".enemies").on("click", function() {
                 $("#enemySelect").hide("#enemySelect"); 
-                $("#enemyEncounter").show("#enemyEncounter");         
-                $("#enemyEncounterWords").append("Enemy " + enemyChar.name + " challenges you!");
-                $("#enemyEncounterImg").attr("src", enemyChar.profileImg);
+                $("#encounter").show("#encounter");         
+                $("#encounterWords").append("Enemy " + enemyChar.name + " challenges you!");
+                $("#encounterImg").attr("src", enemyChar.profImg);
                 
             });
+
+            // hideScenes();
+
+            //create a button here, that runs battle function.
+            // battle();
         }
 
         battle = function(){
             // =============ARENA STUFF==========
-            $("#enemyEncounter").hide("#enemyEncounter");
+            
+            $("#encounter").hide("#encounter");
             $("#arena").show("#arena");   
             $("#enemyImg").attr("src", char[1].frontImg);
             $("#enemyHP").prepend("Enemy " + char[1].name +  "\'s ").append(char[1].currentHitPoints).append("/").append(characterPorygon2.hitPoints);
@@ -227,12 +239,16 @@
             $("#heroHP").prepend(char[3].name +  "\'s ").append(char[3].currentHitPoints).append("/").append(char[3].hitPoints);
         // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
         }
-
-        hideScenes();
+        // getOpponent();
+        // hideScenes();
         getHero();
-        getOpponent();
-        battle();
+
+        // challenge();
+        // battle();
         
+
+
+
 // <!-- // USE THISSSSSSSSSSSS -->
 
     </script>
