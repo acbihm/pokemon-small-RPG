@@ -10,8 +10,8 @@
 
         <!-- ==============CHARACTER SELECTION============== -->
 
-        <div id="heroSelect">
-            <h2>Choose your Pokemon!</h2>
+        <div id="heroSelect" class="select">
+            <h1>Choose your Pokemon!</h1>
             <img id="A" class="heroes" height="130px" width="130px">
             <img id="B" class="heroes" height="130px" width="130px">
             <img id="C" class="heroes" height="130px" width="130px">
@@ -22,7 +22,7 @@
         <!-- ==============OPPONENT SELECTION============== -->
 
         <div id="enemySelect">
-            <h2>Choose your opponent!</h2>
+            <h1>Choose your opponent!</h1>
             <img id="E" class="enemies" height="130px" width="130px">
             <img id="F" class="enemies" height="130px" width="130px">
             <img id="G" class="enemies" height="130px" width="130px">
@@ -32,7 +32,7 @@
         <!-- ==============OPPONENT ENCOUNTER============== -->
 
         <div id="#enemyEncounterChallenge">
-            <h2 id="enemyEncounterWords"></h2>
+            <h1 id="enemyEncounterWords"></h1>
             <img id="enemyEncounterImg">
         </div>
 
@@ -56,7 +56,7 @@
         <!-- ==============RESULTS============== -->
 
         <div id="winOrLose">
-            <h2>winOrLose</h2>
+            <h1>RESULTS</h1>
         </div>
     </div>
 
@@ -196,6 +196,8 @@
 
             $("#G").on("click", function() {
                 enemyChar = char[2];
+                // $("enemySelect").after("<br><br><h2> Your enemy is " + enemyChar.name + "!</h2>");
+//  ====================KEEP THIS
                 alert("Your enemy is  " + enemyChar.name + "!");
                 return enemyChar;
             });
@@ -231,9 +233,6 @@
         getOpponent();
         battle();
         
-
-
-
 // <!-- // USE THISSSSSSSSSSSS -->
 
     </script>
