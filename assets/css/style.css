@@ -10,40 +10,36 @@ body {
 }
 
 #heroSelect {
-    background-color: lightgray;
-    padding-top:10px;
-    height: 375px;
-    width: 598px;
-    position: absolute;
-    top: 20px;
-    /* background-image: url(../images/arenaBG.gif); */
-    border-style: solid;
-    border-color: white;;
-    border-width: 1px;
-    background-image: url(../images/dynamic.gif);
-    background-size:  cover;
-    background-position: -90px 0px;
+    background-image: url(../images/heroBG.gif);
     z-index: 5;
 }
 
 #enemySelect {
+    background-image: url(../images/enemyBG.gif);
+    /* z-index: 4; */
+}
+
+.gameArea {
     background-color: lightgray;
     padding-top:10px;
     height: 375px;
     width: 598px;
-    position: absolute;
+    position: static;       
+        /* maybe this is absolute */
     top: 20px;
-    /* background-image: url(../images/arenaBG.gif); */
     border-style: solid;
     border-color: white;;
     border-width: 1px;
-    background-image: url(../images/dynamic.gif);
     background-size:  cover;
-    background-position: -90px 0px;
-    z-index: 4;
+    background-position: -50px 0px;
 }
 
-#enemyEncounterChallenge {
+.gameArea h1 {
+    text-align: center;
+    text-shadow: 4px 4px 3px #4f4f4f;    
+}
+
+#encounter {
     background-color: black;
     padding-top:10px;
     width: 620px;
@@ -51,12 +47,23 @@ body {
     position: absolute;
     top: 9px;
     left: 9px;
-    z-index: 3;
-    text-align: center;
+    /* z-index: 3; */
     background-image: url(../images/encounter.gif);
-    background-size:  cover;
+    background-size: cover;
     background-position: -90px 0px;
+}
 
+#encounterImg {
+    /* margin: 0 auto; */
+    position: relative;
+    top: 20px;
+    right: -192px;
+}
+
+#encounterWords {
+    text-align: center;
+    text-shadow: 4px 4px 3px #4f4f4f; 
+}
 /* =======maybe just do this in JS? and put the image there in enemyEncounter */
 
     /* top: 20px; */
@@ -67,39 +74,19 @@ body {
 }
 
 #arena {
-    background-color: lightgray;
-    padding-top:10px;
-    height: 375px;
-    width: 598px;
-    position: absolute;
-    top: 20px;
     background-image: url(../images/arenaBG.gif);
-    background-size:  cover;
-    background-position: -90px 0px;
-    border-style: solid;
-    border-color: white;;
-    border-width: 1px;
-    z-index: 2;
+    background-size: cover;
+    /* z-index: 2; */
 }
 
 #winOrLose {
-    background-color: lightgray;
-    padding-top:10px;
-    height: 375px;
-    width: 598px;
-    position: absolute;
-    top: 20px;
     background-image: url(../images/victory.gif);
-    background-size:  cover;
-    background-position: -90px 0px;
-    border-style: solid;
-    border-color: white;;
-    border-width: 1px;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 h1, h2, h3 {
     color: white;
+    
 }
 
 #enemyArenaElement {
@@ -138,7 +125,7 @@ h1, h2, h3 {
     display: inline;
 }
 
-.attack-btn {
+#attack-btn {
     position: absolute;
     top: 144px;
     left: 188px;
