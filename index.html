@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>RPG Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">  
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">  
 </head>
 <body>
     <div id="wrapper">
@@ -117,64 +117,72 @@
         var challenge;
         var battle;
         var hideScenes;
-        $("#heroSelect").show("#heroSelect");
+        var unhide;
+   
 
         hideScenes = function() {
-            $("#heroSelect").hide("#heroSelect");
-            $("#enemySelect").hide("#enemySelect");  
-            $("#encounter").hide("#encounter");
-            $("#arena").hide("#arena"); 
-            $("#winOrLose").hide("#winOrLose");
+            $("#heroSelect").addClass('hidden');
+            $("#enemySelect").addClass('hidden'); 
+            $("#encounter").addClass('hidden');
+            $("#arena").addClass('hidden');
+            $("#winOrLose").addClass('hidden');
+        }
+
+        unhide = function() {
+            $(this).removeClass('hidden');
         }
 
         getHero = function() {
-            // hideScenes();
-            $("#heroSelect").show("#heroSelect");
-            for (var i = 0; i <= 3; i++) {
-                var hero = $("<img>");
-                hero.addClass("heroes");
-                hero.attr('src', char[i].profImg);
-                hero.attr('width', "130px");
-                hero.attr('height', "130px");
-                hero.attr('id', 'heroID' + i);
-                $("#heroSelect").append(hero);
-        }     
+            hideScenes();
+            $('#heroSelect').removeClass('hidden');
+            
+                for (var i = 0; i <= 3; i++) {
+                    var hero = $("<img>");
+                    hero.addClass("heroes");
+                    hero.attr('src', char[i].profImg);
+                    hero.attr('width', "130px");
+                    hero.attr('height', "130px");
+                    hero.attr('id', 'heroID' + i);
+                    $("#heroSelect").append(hero);
+            }     
 
-        $("#heroID0").on("click", function() {
-            heroChar = char[0];
-            alert("You choose " + heroChar.name + "!");
-            return heroChar;
-        });
+            $("#heroID0").on("click", function() {
+                heroChar = char[0];
+                alert("You choose " + heroChar.name + "!");
+                hideScenes();
+                getOpponent();
+                return heroChar;
+            });
 
-        $("#heroID1").on("click", function() {
-            heroChar = char[1];
-            alert("You choose " + heroChar.name + "!");
-            return heroChar;
-        });
+            $("#heroID1").on("click", function() {
+                heroChar = char[1];
+                alert("You choose " + heroChar.name + "!");
+                hideScenes();
+                getOpponent();
+                return heroChar;
+            });
 
-        $("#heroID2").on("click", function() {
-            heroChar = char[2];
-            alert("You choose " + heroChar.name + "!");
-            return heroChar;
-        });
+            $("#heroID2").on("click", function() {
+                heroChar = char[2];
+                alert("You choose " + heroChar.name + "!");
+                hideScenes();
+                getOpponent();
+                return heroChar;
+            });
 
-        $("#heroID3").on("click", function() {
-            heroChar = char[3];
-            alert("You choose " + heroChar.name + "!");
-            return heroChar;
-        });
-
-        $(".heroes").on("click", function() {
-            $("#heroSelect").hide("#heroSelect"); 
-        });
-
-        // do an if else statement here, IF heroChar == null, do getHero, then outside, do getOpponent
-        getOpponent();
-    }
+            $("#heroID3").on("click", function() {
+                heroChar = char[3];
+                alert("You choose " + heroChar.name + "!");
+                hideScenes();
+                getOpponent();
+                return heroChar;
+            });
+        }
 
         getOpponent = function() {
-            // $("#heroSelect").hide("#heroSelect");
-            $("#enemySelect").show("#enemySelect");
+            hideScenes();
+            $('#enemySelect').removeClass('hidden');
+            
             // $("enemySelect").append("<h1>Choose your opponent!</h1>");
             //cant get this to work
             
@@ -191,48 +199,52 @@
             $("#enemyID0").on("click", function() {
                 enemyChar = char[0];
                 alert("Your enemy is " + enemyChar.name + "!");
+                hideScenes();
+                challenge();
                 return enemyChar;
             });
 
             $("#enemyID1").on("click", function() {
                 enemyChar = char[1];
                 alert("Your enemy is " + enemyChar.name + "!");
+                hideScenes();
+                challenge();
                 return enemyChar;
             });
 
             $("#enemyID2").on("click", function() {
                 enemyChar = char[2];
                 alert("Your enemy is " + enemyChar.name + "!");
+                hideScenes();
+                challenge();
                 return enemyChar;
             });
 
             $("#enemyID3").on("click", function() {
                 enemyChar = char[3];
                 alert("Your enemy is " + enemyChar.name + "!");
+                hideScenes();
+                challenge();
                 return enemyChar;
             });
+        }
 
-            $(".enemies").on("click", function() {
-                $("#enemySelect").hide("#enemySelect"); 
-                $("#encounter").show("#encounter");         
-                $("#encounterWords").append("Enemy " + enemyChar.name + " challenges you!");
-                $("#encounterImg").attr("src", enemyChar.profImg);
-                $("#encounterImg").after("<br><br><br><br><h1>Click anywhere to battle!</h1>");
-            });
-
-            $("#encounter").on("click", function () {
+        challenge = function() {
+            $('#encounter').removeClass('hidden');
+            $('#encounterWords').append("Enemy " + enemyChar.name + " challenges you!");
+            $('#encounterImg').attr("src", enemyChar.profImg);
+            $('#encounterImg').after("<br><br><br><br><h1>Click anywhere to battle!</h1>");
+            $("#encounter").on("click", function() {
+                hideScenes();
                 battle();
             });
-
-            // hideScenes();
-            //create a button here, that runs battle function.
-            // battle();
         }
+
+         
 
         battle = function(){
             // =============BATTLE STUFF==========
-            $("#encounter").hide("#encounter");
-            $("#arena").show("#arena");   
+            $('#arena').removeClass('hidden');
             $("#enemyImg").attr("src", enemyChar.frontImg);
             $("#enemyHP").prepend("Enemy " + enemyChar.name +  "\'s ").append(enemyChar.currentHitPoints).append("/").append(enemyChar.hitPoints);
             $("#heroImg").attr("src", heroChar.backImg);
@@ -240,9 +252,8 @@
         // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
         }
 
-
-        hideScenes();
         getHero();
+        console.log(heroChar);
 
 
     </script>
