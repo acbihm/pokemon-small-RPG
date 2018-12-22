@@ -30,11 +30,11 @@
         <!-- ==============BATTLE============== -->
         
         <div id="arena" class="gameArea">
-            <div id="enemyArenaElement">
+            <div>
                 <h3 id="enemyHP">HP: </h3> 
                 <img id="enemyImg" class="enemyAnimIn enemyAnimOut">    
             </div>
-            <div id="heroArenaElement">
+            <div>
                 <h3 id="heroHP">HP: </h3>
                 <img id="heroImg">
                 <button id="attack-btn">
@@ -218,7 +218,6 @@
                 $("#encounterWords").append("Enemy " + enemyChar.name + " challenges you!");
                 $("#encounterImg").attr("src", enemyChar.profImg);
                 $("#encounterImg").after("<br><br><br><br><h1>Click anywhere to battle!</h1>");
-
             });
 
             $("#encounter").on("click", function () {
@@ -226,20 +225,18 @@
             });
 
             // hideScenes();
-
             //create a button here, that runs battle function.
             // battle();
         }
 
         battle = function(){
-            // =============ARENA STUFF==========
-            
+            // =============BATTLE STUFF==========
             $("#encounter").hide("#encounter");
             $("#arena").show("#arena");   
-            $("#enemyImg").attr("src", char[1].frontImg);
-            $("#enemyHP").prepend("Enemy " + char[1].name +  "\'s ").append(char[1].currentHitPoints).append("/").append(characterPorygon2.hitPoints);
-            $("#heroImg").attr("src", char[3].backImg);
-            $("#heroHP").prepend(char[3].name +  "\'s ").append(char[3].currentHitPoints).append("/").append(char[3].hitPoints);
+            $("#enemyImg").attr("src", enemyChar.frontImg);
+            $("#enemyHP").prepend("Enemy " + enemyChar.name +  "\'s ").append(enemyChar.currentHitPoints).append("/").append(enemyChar.hitPoints);
+            $("#heroImg").attr("src", heroChar.backImg);
+            $("#heroHP").prepend(heroChar.name +  "\'s ").append(heroChar.currentHitPoints).append("/").append(heroChar.hitPoints);
         // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
         }
 
