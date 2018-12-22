@@ -82,7 +82,7 @@ padding-top: 25px;
     /* border-style: solid; */
     /* border-color: white;; */
     /* border-width: 1px; */
-}
+
 
 #arena {
     background-image: url(../images/arenaBG.gif);
@@ -100,46 +100,52 @@ h1, h2, h3 {
     
 }
 
-#enemyArenaElement {
+/* #enemyArenaElement {
     position: absolute;
     top: 50px;
     right: 75px;
     display: inline;
-}
+} */
 
 #enemyImg {
         -webkit-filter: drop-shadow(4px 4px 3px  #4f4f4f);  
+        position: fixed;
+        top: 60px;
+        right: 125px;
 }
 
 #enemyHP {
-    position: absolute;
-    top: -62px;
-    left: -206px;
+    position: fixed;
+    bottom: 513px;
+    left: 260px;
     display: inline;
 }
 
-#heroArenaElement {
+/* #heroArenaElement {
     position: absolute;
     top: 250px;
     right: 375px;
     display: inline;
-}
+} */
 
 #heroImg {
-    -webkit-filter: drop-shadow(4px 4px 3px  #4f4f4f);  
+    -webkit-filter: drop-shadow(1px -7px 7px #dd2323);
+    position: fixed;
+    bottom: 212px;
+    left: 90px;
 }
 
 #heroHP {
-    position: absolute;
-    bottom: 113px;
-    left: -60px;
+    position: fixed;
+    bottom: 293px;
+    left: 80px;
     display: inline;
 }
 
 #attack-btn {
-    position: absolute;
-    top: 144px;
-    left: 188px;
+    position: fixed;
+    top: 413px;
+    left: 272px;
     padding: 2em;
     text-align: center;
     margin: 0 auto;
