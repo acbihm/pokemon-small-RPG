@@ -128,7 +128,7 @@
         }
 
         getHero = function() {
-            hideScenes();
+            // hideScenes();
             $("#heroSelect").show("#heroSelect");
             for (var i = 0; i <= 3; i++) {
                 var hero = $("<img>");
@@ -138,39 +138,39 @@
                 hero.attr('height', "130px");
                 hero.attr('id', 'heroID' + i);
                 $("#heroSelect").append(hero);
-            }     
+        }     
 
-            $("#heroID0").on("click", function() {
-                heroChar = char[0];
-                alert("You choose " + heroChar.name + "!");
-                return heroChar;
-            });
+        $("#heroID0").on("click", function() {
+            heroChar = char[0];
+            alert("You choose " + heroChar.name + "!");
+            return heroChar;
+        });
 
-            $("#heroID1").on("click", function() {
-                heroChar = char[1];
-                alert("You choose " + heroChar.name + "!");
-                return heroChar;
-            });
+        $("#heroID1").on("click", function() {
+            heroChar = char[1];
+            alert("You choose " + heroChar.name + "!");
+            return heroChar;
+        });
 
-            $("#heroID2").on("click", function() {
-                heroChar = char[2];
-                alert("You choose " + heroChar.name + "!");
-                return heroChar;
-            });
+        $("#heroID2").on("click", function() {
+            heroChar = char[2];
+            alert("You choose " + heroChar.name + "!");
+            return heroChar;
+        });
 
-            $("#heroID3").on("click", function() {
-                heroChar = char[3];
-                alert("You choose " + heroChar.name + "!");
-                return heroChar;
-            });
+        $("#heroID3").on("click", function() {
+            heroChar = char[3];
+            alert("You choose " + heroChar.name + "!");
+            return heroChar;
+        });
 
-            $(".heroes").on("click", function() {
-                $("#heroSelect").hide("#heroSelect"); 
-            });
+        $(".heroes").on("click", function() {
+            $("#heroSelect").hide("#heroSelect"); 
+        });
 
-            // do an if else statement here, IF heroChar == null, do getHero, then outside, do getOpponent
-            getOpponent();
-        }
+        // do an if else statement here, IF heroChar == null, do getHero, then outside, do getOpponent
+        getOpponent();
+    }
 
         getOpponent = function() {
             // $("#heroSelect").hide("#heroSelect");
@@ -178,8 +178,6 @@
             // $("enemySelect").append("<h1>Choose your opponent!</h1>");
             //cant get this to work
             
-
-
             for (var i = 0; i <= 3; i++) {
                 var enemy = $("<img>");
                 enemy.addClass('enemies');
@@ -219,7 +217,12 @@
                 $("#encounter").show("#encounter");         
                 $("#encounterWords").append("Enemy " + enemyChar.name + " challenges you!");
                 $("#encounterImg").attr("src", enemyChar.profImg);
-                
+                $("#encounterImg").after("<br><br><br><br><h1>Click anywhere to battle!</h1>");
+
+            });
+
+            $("#encounter").on("click", function () {
+                battle();
             });
 
             // hideScenes();
@@ -239,17 +242,11 @@
             $("#heroHP").prepend(char[3].name +  "\'s ").append(char[3].currentHitPoints).append("/").append(char[3].hitPoints);
         // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
         }
-        // getOpponent();
-        // hideScenes();
+
+
+        hideScenes();
         getHero();
 
-        // challenge();
-        // battle();
-        
-
-
-
-// <!-- // USE THISSSSSSSSSSSS -->
 
     </script>
     
