@@ -14,10 +14,18 @@ body {
     z-index: 5;
 }
 
+[id^="heroID"] {
+margin: 9.7px;
+}
+
 #enemySelect {
     background-image: url(../images/enemyBG.gif);
     /* z-index: 4; */
 }
+
+[id^="enemyID"] {
+    margin: 9.7px;
+    }
 
 .gameArea {
     background-color: lightgray;
