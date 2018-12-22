@@ -9,27 +9,40 @@ body {
     padding: 10px;
 }
 
+.hidden {
+    display:none;
+}
+
+.shown {
+    display: block;
+}
+
 #heroSelect {
-    background-image: url(../images/heroBG.gif);
+    /* background-image: url(../images/heroBG.gif); */
     z-index: 5;
 }
 
 [id^="heroID"] {
 margin: 9.7px;
 padding-top: 25px;
+-webkit-filter: drop-shadow(1px -7px 7px #4f4f4f);  
+
 }
 
-#enemySelect {
-    background-image: url(../images/enemyBG.gif);
+/* #enemySelect { */
+    /* background-image: url(../images/enemyBG.gif); */
     /* z-index: 4; */
-}
+/* } */
+
 
 [id^="enemyID"] {
     margin: 9.7px;
     padding-top: 25px;
-    -webkit-filter: drop-shadow(1px -7px 7px #dd2323);  
-    }
+    -webkit-filter: drop-shadow(1px -7px 7px #4f4f4f);  
+}
 
+
+    
 .gameArea {
     background-color: lightgray;
     padding-top:10px;
@@ -45,11 +58,16 @@ padding-top: 25px;
     background-position: -50px 0px;
 }
 
-.gameArea h1 {
+.gameArea h1, h2 {
     text-align: center;
     text-shadow: 4px 4px 3px #4f4f4f;    
 }
 
+.gameArea h3 {
+    text-align: center;
+    text-shadow: 2px 2px 2px #4f4f4f;    
+}
+ 
 #encounter {
     background-color: black;
     padding-top:10px;
@@ -59,7 +77,7 @@ padding-top: 25px;
     top: 9px;
     left: 9px;
     /* z-index: 3; */
-    background-image: url(../images/encounter.gif);
+    /* background-image: url(../images/encounter.gif); */
     background-size: cover;
     background-position: -90px 0px;
 }
@@ -69,6 +87,8 @@ padding-top: 25px;
     position: relative;
     top: 20px;
     right: -192px;
+    -webkit-filter: drop-shadow(1px -7px 7px #dd2323);
+
 }
 
 #encounterWords {
@@ -77,21 +97,16 @@ padding-top: 25px;
 }
 /* =======maybe just do this in JS? and put the image there in enemyEncounter */
 
-    /* top: 20px; */
-    /* background-image: url(../images/victory.gif); */
-    /* border-style: solid; */
-    /* border-color: white;; */
-    /* border-width: 1px; */
 
 
 #arena {
-    background-image: url(../images/arenaBG.gif);
+    /* background-image: url(../images/arenaBG.gif); */
     background-size: cover;
     /* z-index: 2; */
 }
 
 #winOrLose {
-    background-image: url(../images/victory.gif);
+    /* background-image: url(../images/victory.gif); */
     /* z-index: 1; */
 }
 
@@ -108,10 +123,10 @@ h1, h2, h3 {
 } */
 
 #enemyImg {
-        -webkit-filter: drop-shadow(4px 4px 3px  #4f4f4f);  
-        position: fixed;
-        top: 60px;
-        right: 125px;
+    -webkit-filter: drop-shadow(1px -7px 7px #dd2323);
+    position: fixed;
+    top: 60px;
+    right: 125px;
 }
 
 #enemyHP {
@@ -129,7 +144,7 @@ h1, h2, h3 {
 } */
 
 #heroImg {
-    -webkit-filter: drop-shadow(1px -7px 7px #dd2323);
+    -webkit-filter: drop-shadow(1px -7px 7px #4286f4);
     position: fixed;
     bottom: 212px;
     left: 90px;
@@ -158,7 +173,7 @@ h1, h2, h3 {
     border-style: solid;
     border-width: 3px;  
     font-weight: bolder;
-    background-image: url(../images/dynamic.gif);
+    /* background-image: url(../images/dynamic.gif); */
     box-shadow: 2px 2px 2px grey
 
 }
