@@ -101,7 +101,7 @@ padding-top: 25px;
 
 
 #arena {
-    background-image: url(../images/arenaBG.gif);
+    /* background-image: url(../images/arenaBG.gif); */
     background-size: cover;
     /* z-index: 2; */
 }
@@ -112,6 +112,15 @@ padding-top: 25px;
     right: 75px;
     display: inline;
 } */
+
+#heroHPBar {
+    width: 17em;
+    /* height: 10em; */
+    box-sizing: none;
+    /* line-height: 30px; */
+    /* -webkit-filter: drop-shadow(1px -7px 7px #4f4f4f); */
+
+}
 
 #enemyImg {
     -webkit-filter: drop-shadow(1px -7px 7px #dd2323);
@@ -126,6 +135,16 @@ padding-top: 25px;
     left: 90px;
     display: inline;
 }
+
+#enemyHPBar {
+    width: 17em;
+    /* height: 10em; */
+    box-sizing: none;
+    /* line-height: 30px; */
+    /* -webkit-filter: drop-shadow(1px -7px 7px #4f4f4f); */
+
+}
+
 
 /* #heroArenaElement {
     position: absolute;
@@ -147,6 +166,12 @@ padding-top: 25px;
     top: 344px;
     left: 340px;
     display: inline;
+}
+
+#heroHPBar {
+    position: absolute;
+    top: 344px;
+    left: 340px;
 }
 
 #attack-btn {
@@ -183,74 +208,22 @@ padding-top: 25px;
 
 /* ======================== */
 
-
-
-.enemyAnimIn {
-
-    -webkit-transition: .02s ease-in-out;
-    -moz-transition: .02s ease-in-out;
-    -o-transition: .02s ease-in-out;
-    transition: .02s ease-in-out;
-    
+.heroAnimIn {
+    -webkit-transform: translate(17em,-13em);
   }
-  .enemyAnimIn:hover {
+
+  .enemyAnimIn {
     -webkit-transform: translate(-17em,13em);
-    /* -moz-transform: translate(-17em,13em);
-    -o-transform: translate(-17em,13em);
-    -ms-transform: translate(-17em,13em);
-    transform: translate(-17em,13em); */
-
-    /* -webkit-transform: scale(1.3); */
-    /* WANT TO MAKE THEM BIG/SMALL ON TACKLE */
   }
 
-  /* .enemyAnimOut {
-
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .02s ease-in-out;
-    -o-transition: .02s ease-in-out;
-    transition: .02s ease-in-out;
+  #heroDMG {
+    position: absolute;
+    top: 232px;
+    left: 72px;
   }
-  .enemyAnimOut:hover {
-    -webkit-transform: translate(2em,-2em);
-    -moz-transform: translate(2em,-2em);
-    -o-transform: translate(2em,-2em);
-    -ms-transform: translate(2em,-2em);
-    transform: translate(2em,-2em);
-  } */
 
-
-  /* =========KEEP THIS -- THIS WAS MY TESTING======== */
-  /* .enemyAnimIn {
-
-    -webkit-transition: .05s ease-in-out;
-    -webkit-transform: translate(2em,-2em);
-    /* -webkit-transition: .05s ease-in-out; */
-    
-    /* -moz-transition: .05s ease-in-out;
-    -o-transition: .05s ease-in-out; */
-    /* transition: .05s ease-in-out; */
-  /* } */
-  /* .enemyAnimIn:hover { */
-    /* -webkit-transform: translate(-2em,2em); */
-    
-    /* -moz-transform: translate(-2em,2em);
-    -o-transform: translate(-2em,2em);
-    -ms-transform: translate(-2em,2em); */
-    /* transform: translate(-2em,2em); */
-  /* } */
-
-  /* .enemyAnimOut { */
-
-    /* -webkit-transition: .05s ease-in-out; */
-    /* -moz-transition: .05s ease-in-out;
-    -o-transition: .05s ease-in-out; */
-    /* transition: .05s ease-in-out; */
-  /* } */
-  /* .enemyAnimOut:hover { */
-    /* -webkit-transform: translate(2em,-2em); */
-    /* -moz-transform: translate(2em,-2em);
-    -o-transform: translate(2em,-2em);
-    -ms-transform: translate(2em,-2em); */
-    /* transform: translate(2em,-2em);
-  } */ 
+    #enemyDMG {
+    position: absolute;
+    top: 100px;
+    left: 465px;
+  }
