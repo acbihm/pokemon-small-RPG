@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>RPG Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">  
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">  
 </head>
 <body>
     <div id="wrapper">
@@ -32,11 +32,16 @@
         <div id="arena" class="gameArea">
             <div>
                 <h3 id="enemyHP">HP: </h3> 
-                <img id="enemyImg" class="enemyAnimIn enemyAnimOut">    
+                <progress id="enemyHPBar" value="100" max="100"></progress>
+                <img id="enemyImg">
+                <img id="enemyDMG">
+
             </div>
             <div>
                 <h3 id="heroHP">HP: </h3>
+                <progress id="heroHPBar"></progress>
                 <img id="heroImg">
+                <img id="heroDMG">
                 <button id="attack-btn">
                 <span class="attackBoost"></span>ATTACK</button> 
             </div>
@@ -53,9 +58,12 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         
+
+
+
         var characterBulbasaur = {
             name: "Bulbasaur",
-            currentHitPoints: 5,    //change this in arenaChar
+            currentHitPoints: 89,    //change this in arenaChar
             hitPoints: 100,
             attackPower: 6,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
@@ -68,7 +76,7 @@
 
         var characterPorygon2 = {
             name: "Porygon2",
-            currentHitPoints: 5,    //change this in arenaChar
+            currentHitPoints: 100,    //change this in arenaChar
             hitPoints: 130,
             attackPower: 10,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
@@ -81,7 +89,7 @@
 
         var characterGengar = {
             name: "Gengar",
-            currentHitPoints: 5,    //change this in arenaChar
+            currentHitPoints: 150,    //change this in arenaChar
             hitPoints: 170,
             attackPower: 14,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
@@ -94,7 +102,7 @@
 
         var characterMewtwo = {
             name: "Mewtwo",
-            currentHitPoints: 5,    //change this in arenaChar
+            currentHitPoints: 190,    //change this in arenaChar
             hitPoints: 200,
             attackPower: 18,         //this will go up my its base attack power
             baseAttackIncrement: 6,     //for now, it will be 6
@@ -240,17 +248,69 @@
             });
         }
 
-         
-
         battle = function(){
             // =============BATTLE STUFF==========
             $('#arena').removeClass('hidden');
+
             $("#enemyImg").attr("src", enemyChar.frontImg);
-            $("#enemyHP").prepend("Enemy " + enemyChar.name +  "\'s ").append(enemyChar.currentHitPoints).append("/").append(enemyChar.hitPoints);
             $("#heroImg").attr("src", heroChar.backImg);
+
+            $("#enemyHP").prepend("Enemy " + enemyChar.name +  "\'s ").append(enemyChar.currentHitPoints).append("/").append(enemyChar.hitPoints);
             $("#heroHP").prepend(heroChar.name +  "\'s ").append(heroChar.currentHitPoints).append("/").append(heroChar.hitPoints);
-        // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
+
+            //this populates the HP bars 
+            
+            $("#heroHPBar").attr("max", heroChar.hitPoints);
+            $("#heroHPBar").attr("value", heroChar.currentHitPoints);
+            $("#enemyHPBar").attr("max", enemyChar.hitPoints);
+            $("#enemyHPBar").attr("value", enemyChar.currentHitPoints);
+
+            // really this code shouldnt be on this button but im gonna keep it here for now
+            $("#attack-btn").on("click", function() {
+
+
+                $("#attack-btn").attr("disabled","disabled");
+        //set this on a timer
+                
+                $("heroImg").addClass("heroAnimIn");
+                $("#enemyDMG").attr("src", "assets/images/boom.png");
+                
+                    function heroReturn(){
+                        $("#enemyDMG").removeAttr("src", "assets/images/boom.png");
+                        $("#heroImg").removeClass("heroAnimIn");
+                    }
+                setTimeout(heroReturn, 160);
+// YOU ATTACK! THEN CODE ABOUT ENEMY COUNTER-ATTACKS!
+                $("#enemyImg").addClass("enemyAnimIn");
+                $("#heroDMG").attr("src", "assets/images/boom.png");
+
+// IF STATEMENT IF HERO HP < MAX, ENEMY WILL ATTACK
+                    function enemyReturn(){
+                        $("#heroDMG").removeAttr("src", "assets/images/boom.png");
+                        $("#enemyImg").removeClass("enemyAnimIn");
+                    }
+                setTimeout(enemyReturn, 160);
+//IF STATEMENT IF HERO HP <= 0, YOU LOSE, ELSE, ATTACK AGAIN, INCREMENT ATTACK, NARRATE INCREASE
+
+// ==============================
+                // 
+                // $("heroHPBar").attr("max", heroChar.hitPoints);
+                // $("heroHPBar").attr("value", heroChar.currentHitPoints);
+                
+
+                // let HHP = document.getElementById("heroHPbar");
+
+                // console.log(HHP);
+                // HHP.value -= 10; 
+                //Or whatever you want to do with it.
+
+                        // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
+
+            });
+        
+
         }
+
 
         getHero();
         console.log(heroChar);
