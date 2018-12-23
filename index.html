@@ -10,22 +10,15 @@
 
         <!-- ==============CHARACTER SELECTION============== -->
 
-        <div id="heroSelect" class="gameArea">
-            <h1>Choose your Pokemon!</h1>
-        </div>
+        <div id="heroSelect" class="gameArea"></div>
 
         <!-- ==============OPPONENT SELECTION============== -->
 
-        <div id="enemySelect" class="gameArea">
-            <h1>Choose your opponent!</h1>
-        </div>
+        <div id="enemySelect" class="gameArea"></div>
 
         <!-- ==============OPPONENT ENCOUNTER============== -->
 
-        <div id="encounter" class="gameArea">
-            <h1 id="encounterWords"></h1>
-            <img id="encounterImg">
-        </div>
+        <div id="encounter" class="gameArea"></div>
 
         <!-- ==============BATTLE============== -->
         
@@ -42,15 +35,15 @@
                 <progress id="heroHPBar"></progress>
                 <img id="heroImg">
                 <img id="heroDMG">
-                <button id="attack-btn">
-                <span class="attackBoost"></span>ATTACK</button> 
+                <button id="attack-btn">ATTACK</button>
+                <h4 id="narrator"></h4>
             </div>
         </div>
 
         <!-- ==============RESULTS============== -->
 
         <div id="winOrLose" class="gameArea">
-            <h1>RESULTS</h1>
+            <!-- <h1>RESULTS</h1> -->
         </div>
 
         <!-- ==============JAVASCRIPT============== -->
@@ -126,6 +119,8 @@
         var battle;
         var hideScenes;
         var unhide;
+        var lossCheck;
+        var winCheck;
    
 
         hideScenes = function() {
@@ -142,7 +137,9 @@
 
         getHero = function() {
             hideScenes();
+            $('#heroSelect').html("<h1>Choose your Pokemon!</h1>");
             $('#heroSelect').removeClass('hidden');
+
             
                 for (var i = 0; i <= 3; i++) {
                     var hero = $("<img>");
@@ -189,6 +186,7 @@
 
         getOpponent = function() {
             hideScenes();
+            $('#enemySelect').html("<h1>Choose an opponent!</h1>");
             $('#enemySelect').removeClass('hidden');
             
             // $("enemySelect").append("<h1>Choose your opponent!</h1>");
@@ -238,10 +236,12 @@
         }
 
         challenge = function() {
+            $('#enemySelect').html('');
+            $('#encounter').html("<h1 id='encounterWords'></h1><br><img id='encounterImg'>")
             $('#encounter').removeClass('hidden');
             $('#encounterWords').append("Enemy " + enemyChar.name + " challenges you!");
             $('#encounterImg').attr("src", enemyChar.profImg);
-            $('#encounterImg').after("<br><br><br><br><h1>Click anywhere to battle!</h1>");
+            $('#encounterImg').after("<br><br><br><br><h1 id='encounterWords'>Click anywhere to battle!</h1>");
             $("#encounter").on("click", function() {
                 hideScenes();
                 battle();
@@ -249,37 +249,89 @@
         }
 
         battle = function(){
-            // =============BATTLE STUFF==========
+            $("#encounter").html("");
             $('#arena').removeClass('hidden');
-
             $("#enemyImg").attr("src", enemyChar.frontImg);
             $("#heroImg").attr("src", heroChar.backImg);
 
-            $("#enemyHP").prepend("Enemy " + enemyChar.name +  "\'s ").append(enemyChar.currentHitPoints).append("/").append(enemyChar.hitPoints);
-            $("#heroHP").prepend(heroChar.name +  "\'s ").append(heroChar.currentHitPoints).append("/").append(heroChar.hitPoints);
+            //add this back in later*
+            // $("#enemyHP").prepend("Enemy " + enemyChar.name +  "\'s ").append(enemyChar.currentHitPoints).append("/").append(enemyChar.hitPoints);
+            // $("#heroHP").prepend(heroChar.name +  "\'s ").append(heroChar.currentHitPoints).append("/").append(heroChar.hitPoints);
 
-            //this populates the HP bars 
-            
+                //this populates the HP bars 
             $("#heroHPBar").attr("max", heroChar.hitPoints);
-            $("#heroHPBar").attr("value", heroChar.currentHitPoints);
+            $("#heroHPBar").attr("value", heroChar.hitPoints);
             $("#enemyHPBar").attr("max", enemyChar.hitPoints);
-            $("#enemyHPBar").attr("value", enemyChar.currentHitPoints);
+            $("#enemyHPBar").attr("value", enemyChar.hitPoints);
 
             // really this code shouldnt be on this button but im gonna keep it here for now
             $("#attack-btn").on("click", function() {
-
-
+                $('#narrator').text('');
+                $('#narrator').append(heroChar.name + "  deals " + heroChar.attackPower + " points of damage!");
                 $("#attack-btn").attr("disabled","disabled");
-        //set this on a timer
-                
+                    //prevents multiple clicks
+                function turnTimer() {
+                    //this function will run on a timer, allowing all other functions triggered
+                    //by the on-click will finish. At its end, the button will be able to be
+                    //clicked again
+                    $("#attack-btn").removeAttr("disabled","disabled");
+                }
+                setTimeout(turnTimer, 4300);
+
+// should i set intervals that add up after each event?
+
+                    // $('#narrator').append(heroChar.name + "  deals " + heroChar.attackPower + " points of damage!");
                 $("heroImg").addClass("heroAnimIn");
                 $("#enemyDMG").attr("src", "assets/images/boom.png");
-                
-                    function heroReturn(){
+                    function heroTackle(){
                         $("#enemyDMG").removeAttr("src", "assets/images/boom.png");
                         $("#heroImg").removeClass("heroAnimIn");
                     }
-                setTimeout(heroReturn, 160);
+                setTimeout(heroTackle, 650);
+
+                enemyChar.hitPoints = enemyChar.hitPoints - heroChar.attackPower;
+                // enemyChar.currentHitPoints = enemyChar.hitPoints;
+                $("#enemyHPBar").val(enemyChar.hitPoints);
+                    //this is the hero damaging the enemy and  HP bar lowering to reflect new HP
+                function attackUp(){
+                    heroChar.attackPower = heroChar.attackPower + heroChar.baseAttackIncrement;
+                    $('#narrator').text('');
+                    $('#narrator').append(heroChar.name + "'\s attack power increases!");
+                    winCheck();
+                }
+                setTimeout(attackUp, 1050);
+
+                heroChar.attackPower = heroChar.attackPower + heroChar.baseAttackIncrement;
+
+                function enemyAttack(){
+                    $('#narrator').text('');
+                    $('#narrator').prepend("Enemy ").append(enemyChar.name + " counter-attacks for " + enemyChar.counterAttack +  " damage!");
+                    heroChar.hitPoints = heroChar.hitPoints - enemyChar.counterAttack;
+                    // heroChar.currentHitPoints = heroChar.hitPoints;
+                    $("#heroHPBar").val(heroChar.hitPoints);
+                        //this is the enemy damaging the hero and  HP bar lowering to reflect new HP
+                }
+                setTimeout(enemyAttack, 2350);
+                $("enemyImg").addClass("enemyAnimIn");
+                $("#heroDMG").attr("src", "assets/images/boom.png");
+                    function enemyTackle(){
+                        $("#heroDMG").removeAttr("src", "assets/images/boom.png");
+                        $("#enemyImg").removeClass("enemyAnimIn");
+                        lossCheck();
+                    }
+                setTimeout(enemyTackle, 3000);
+
+
+                function newTurn() {
+                    $('#narrator').text('');
+                    $('#narrator').append(heroChar.name + ' may now attack again!');
+                }
+                setTimeout(newTurn, 3500);
+
+                
+                //this is the end of hero's attack
+
+
 // YOU ATTACK! THEN CODE ABOUT ENEMY COUNTER-ATTACKS!
                 $("#enemyImg").addClass("enemyAnimIn");
                 $("#heroDMG").attr("src", "assets/images/boom.png");
@@ -291,31 +343,35 @@
                     }
                 setTimeout(enemyReturn, 160);
 //IF STATEMENT IF HERO HP <= 0, YOU LOSE, ELSE, ATTACK AGAIN, INCREMENT ATTACK, NARRATE INCREASE
-
-// ==============================
-                // 
-                // $("heroHPBar").attr("max", heroChar.hitPoints);
-                // $("heroHPBar").attr("value", heroChar.currentHitPoints);
-                
-
-                // let HHP = document.getElementById("heroHPbar");
-
-                // console.log(HHP);
-                // HHP.value -= 10; 
-                //Or whatever you want to do with it.
-
-                        // IF HERO STILL HAS HP, RUN GET OPPONENT AGAIN
-
             });
-        
-
         }
 
+        lossCheck = function() {
+            if (heroChar.hitPoints <= 0) {
+                $('#winOrLose').html(''); 
+                $('#winOrLose').html('<h1>RESULTS</h1>');
+                hideScenes();
+                $('#winOrLose').removeClass('hidden');
+                $("#winOrLose").addClass('.loss');
+                $('#winOrLose').append("<br><br><br><h1>YOU LOST!</h1>");
+            }
+        }
 
+        winCheck = function() {
+            if (enemyChar.hitPoints <= 0) {
+                $('#winOrLose').html(''); 
+                $('#winOrLose').html('<h1>RESULTS</h1>');
+                clearTimeout();
+                hideScenes();
+                $('#winOrLose').removeClass('hidden');
+                $("#winOrLose").addClass('.win');
+                $('#winOrLose').append("<br><br><br><h1>You won!<br> Click to keep fighting stronger enemies!</h1>");
+                $("#winOrLose").on("click", function() {
+                getOpponent();
+            });
+            }
+        }
         getHero();
-        console.log(heroChar);
-
-
     </script>
     
 </body>
