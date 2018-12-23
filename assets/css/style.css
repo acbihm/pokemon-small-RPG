@@ -9,17 +9,17 @@ body {
     padding: 10px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     color: white;
     
 }
 
-.hidden {
-    display:none;
+h3, h4 {
+    text-shadow: 2px 2px 2px #4f4f4f;    
 }
 
-.shown {
-    display: block;
+.hidden {
+    display:none;
 }
 
 #heroSelect {
@@ -65,8 +65,7 @@ padding-top: 25px;
 }
 
 .gameArea h3 {
-    text-align: center;
-    text-shadow: 2px 2px 2px #4f4f4f;    
+    text-align: center;   
 }
  
 #encounter {
@@ -96,22 +95,12 @@ padding-top: 25px;
     text-align: center;
     text-shadow: 4px 4px 3px #4f4f4f; 
 }
-/* =======maybe just do this in JS? and put the image there in enemyEncounter */
-
-
 
 #arena {
     /* background-image: url(../images/arenaBG.gif); */
     background-size: cover;
     /* z-index: 2; */
 }
-
-/* #enemyArenaElement {
-    position: absolute;
-    top: 50px;
-    right: 75px;
-    display: inline;
-} */
 
 #heroHPBar {
     width: 17em;
@@ -145,14 +134,6 @@ padding-top: 25px;
 
 }
 
-
-/* #heroArenaElement {
-    position: absolute;
-    top: 250px;
-    right: 375px;
-    display: inline;
-} */
-
 #heroImg {
     -webkit-filter: drop-shadow(1px -7px 7px #4286f4);
     position: absolute;
@@ -176,9 +157,9 @@ padding-top: 25px;
 
 #attack-btn {
     position: absolute;
-    top: 413px;
-    left: 272px;
-    padding: 2em;
+    top: 444px;
+    left: 282px;
+    padding: .5em;
     text-align: center;
     margin: 0 auto;
     border-style: solid;
@@ -186,27 +167,30 @@ padding-top: 25px;
     background-color: #e29631;
     box-shadow: 4px 4px 4px grey
 }
-.attack-btn:hover {
+
+#attack-btn:hover {
     border-style: solid;
     border-width: 3px;  
     font-weight: bolder;
     background-image: url(../images/dynamic.gif);
     box-shadow: 2px 2px 2px grey
-
 }
 
-#winOrLose {
+#narrator {
+    position: absolute;
+    top: 393px;
+    left: 165px;
+}
+
+.win {
     background-image: url(../images/victory.gif);
     /* z-index: 1; */
 }
-/* ==================SELECT CHAR===== */
 
-
-
-
-
-
-/* ======================== */
+.loss {
+    background-image: url(../images/loss.gif);
+    /* z-index: 1; */
+}
 
 .heroAnimIn {
     -webkit-transform: translate(17em,-13em);
