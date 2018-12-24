@@ -132,7 +132,7 @@ padding-top: 25px;
 #heroHUD {
     position: absolute;
     top: 344px;
-    right: 85px;
+    left: 375px;
     display: inline;
 }
 
