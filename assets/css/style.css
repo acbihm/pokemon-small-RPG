@@ -163,18 +163,28 @@ padding-top: 25px;
     text-align: center;
     margin: 0 auto;
     border-style: solid;
-    border-color: black;
-    background-color: #e29631;
-    box-shadow: 4px 4px 4px grey
 }
 
-#attack-btn:hover {
-    border-style: solid;
+.on {
     border-width: 3px;  
-    font-weight: bolder;
+    font-weight: bold;
+    border-color: black;
+    background-color: #e29631;
+    box-shadow: 4px 4px 4px grey;
     background-image: url(../images/dynamic.gif);
-    box-shadow: 2px 2px 2px grey
+
 }
+
+.off {
+    border-width: 1px;  
+    font-weight: bold;
+    border-color: black;
+    background-color: #917a5b;
+    box-shadow: 2px 2px 2px grey;
+    background-image: none;
+
+}
+
 
 #narrator {
     position: absolute;
@@ -192,11 +202,11 @@ padding-top: 25px;
     /* z-index: 1; */
 }
 
-.heroAnimIn {
+.heroTackle {
     -webkit-transform: translate(17em,-13em);
   }
 
-  .enemyAnimIn {
+  .enemyTackle {
     -webkit-transform: translate(-17em,13em);
   }
 
