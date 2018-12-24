@@ -35,8 +35,7 @@ padding-top: 25px;
 
 #enemySelect { 
     background-image: url(../images/enemyBG.gif);
-    /* z-index: 4; */
- }
+}
 
 [id^="enemyID"] {
     margin: 9.7px;
@@ -50,7 +49,6 @@ padding-top: 25px;
     height: 375px;
     width: 598px;
     position: static;       
-        /* maybe this is absolute */
     top: 20px;
     border-style: solid;
     border-color: white;;
@@ -67,7 +65,7 @@ padding-top: 25px;
 .gameArea h3 {
     text-align: center;   
 }
- 
+
 #encounter {
     background-color: black;
     padding-top:10px;
@@ -76,7 +74,6 @@ padding-top: 25px;
     position: absolute;
     top: 9px;
     left: 9px;
-    /* z-index: 3; */
     background-image: url(../images/encounter.gif);
     background-size: cover;
     background-position: -90px 0px;
@@ -88,7 +85,6 @@ padding-top: 25px;
     top: 20px;
     right: -192px;
     -webkit-filter: drop-shadow(1px -7px 7px #dd2323);
-
 }
 
 #encounterWords {
@@ -99,16 +95,11 @@ padding-top: 25px;
 #arena {
     background-image: url(../images/arenaBG.png);
     background-size: 816px 580px;
-    /* z-index: 2; */
 }
 
 #heroHPBar {
     width: 17em;
-    /* height: 10em; */
     box-sizing: none;
-    /* line-height: 30px; */
-    /* -webkit-filter: drop-shadow(1px -7px 7px #4f4f4f); */
-
 }
 
 #enemyImg {
@@ -118,20 +109,17 @@ padding-top: 25px;
     left: 465px;
 }
 
-#enemyHP {
+#enemyHUD {
     position: absolute;
-    top: 19px;
-    left: 90px;
+    top: 29px;
+    left: 32px;
     display: inline;
 }
 
+
 #enemyHPBar {
     width: 17em;
-    /* height: 10em; */
     box-sizing: none;
-    /* line-height: 30px; */
-    /* -webkit-filter: drop-shadow(1px -7px 7px #4f4f4f); */
-
 }
 
 #heroImg {
@@ -139,13 +127,12 @@ padding-top: 25px;
     position: absolute;
     top: 302px;
     left: 102px;
-    /* transform: scale(1.6); */
 }
 
-#heroHP {
+#heroHUD {
     position: absolute;
     top: 344px;
-    left: 340px;
+    right: 85px;
     display: inline;
 }
 
@@ -172,7 +159,6 @@ padding-top: 25px;
     background-color: #e29631;
     box-shadow: 4px 4px 4px grey;
     background-image: url(../images/dynamic.gif);
-
 }
 
 .off {
@@ -192,12 +178,10 @@ padding-top: 25px;
 
 .win {
     background-image: url(../images/victory.gif);
-    /* z-index: 1; */
 }
 
 .loss {
     background-image: url(../images/loss.gif);
-    /* z-index: 1; */
 }
 
 .heroTackle {
