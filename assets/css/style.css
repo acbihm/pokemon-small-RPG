@@ -97,8 +97,8 @@ padding-top: 25px;
 }
 
 #arena {
-    background-image: url(../images/arenaBG.png); 
-    background-size: cover;
+    background-image: url(../images/arenaBG.png);
+    background-size: 816px 580px;
     /* z-index: 2; */
 }
 
