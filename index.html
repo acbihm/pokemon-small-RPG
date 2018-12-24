@@ -18,7 +18,7 @@
 
         <!-- ==============   CHALLENGE   ============== -->
 
-        <div id="encounter" class="gameArea"></div>
+        <div id="encounter" class="gameArea en"></div>
 
         <!-- ==============   BATTLE   ============== -->
         
@@ -113,8 +113,8 @@
         var heroChar;
         var getHero;
         var getOpponent;  
-        var challenge;
-        var battle;
+        var encounterFunc;
+        var battleFunc;
         var startTurn;
         var hideScenes;
         var lossCheck;
@@ -178,15 +178,18 @@
             });
         }
 
-        getOpponent = function(HP) {
+        getOpponent = function() {
+
+            $("#heroSelect").html("");
+                //^resets previous scene
             hideScenes();
-            $("#heroHPBar").attr("value", HP);
-            $('#enemySelect').html("<h1>Choose an opponent!</h1>");
+            // $("#heroHPBar").attr("value", HP);
+            $('#enemySelect').html("");
+            $('#enemySelect').html("<h1>Choose an opponent!</h1>");      
             $('#enemySelect').removeClass('hidden');
             for (var i = 0; i <= 3; i++) {
                 if (char[i].chosenOrDefeated == false){
                     var enemy = $("<img>");
-                    enemy.addClass('enemies');
                     enemy.attr('src', char[i].profImg);
                     enemy.attr('width', "130px");
                     enemy.attr('height', "130px");
@@ -196,53 +199,68 @@
             }     
 
             $("#enemyID0").on("click", function() {
+                enemyChar = null;
                 enemyChar = char[0];
                 // alert("Your enemy is " + enemyChar.name + "!");
                 hideScenes();
-                challenge();
+                encounterFunc();
                 return enemyChar;
             });
 
             $("#enemyID1").on("click", function() {
+                enemyChar = null;
                 enemyChar = char[1];
                 // alert("Your enemy is " + enemyChar.name + "!");
                 hideScenes();
-                challenge();
+                encounterFunc();
                 return enemyChar;
             });
 
             $("#enemyID2").on("click", function() {
+                enemyChar = null;
                 enemyChar = char[2];
                 // alert("Your enemy is " + enemyChar.name + "!");
                 hideScenes();
-                challenge();
+                encounterFunc();
                 return enemyChar;
             });
 
             $("#enemyID3").on("click", function() {
+                enemyChar = null;
                 enemyChar = char[3];
                 // alert("Your enemy is " + enemyChar.name + "!");
                 hideScenes();
-                challenge();
+                encounterFunc();
                 return enemyChar;
             });
         }
 
-        challenge = function() {
+        encounterFunc = function() {
             $('#enemySelect').html('');
+                //^resets previous scene
+
+            // $('.en').attr("id", "encounter");
             $('#encounter').html("<h1 id='encounterWords'></h1><br><img id='encounterImg'>")
             $('#encounter').removeClass('hidden');
             $('#encounterWords').append("Enemy " + enemyChar.name + " challenges you!");
             $('#encounterImg').attr("src", enemyChar.profImg);
             $('#encounterImg').after("<br><br><br><br><h1 id='encounterWords'>Click anywhere to battle!</h1>");
-            $("#encounter").on("click", function() {
+            $("#encounter").one("click", function() {
+                // ^using "one" makes battleFunc loop one less time, but still one time too many
                 hideScenes();
-                battle();
+                battleFunc();
+                // $('#encounter').removeAttr("id", "enounter");
             });
         }
 
-        battle = function(){
+        battleFunc = function(){
+            // alert("a");
+            // ^alerts "a", then "2", then a, then 2
+
+            // console.log(Object.values(enemyChar));
+
             $("#encounter").html("");
+                //^resets previous scene
             $('#arena').removeClass('hidden');
             $("#enemyImg").attr("src", enemyChar.frontImg);
             $("#heroImg").attr("src", heroChar.backImg);
@@ -254,74 +272,14 @@
             $("#heroHPBar").attr("value", heroChar.currentHitPoints);
             $("#enemyHPBar").attr("max", enemyChar.hitPoints);
             $("#enemyHPBar").attr("value", enemyChar.currentHitPoints);
-                //these are the HP bars
-                
-            // var clearTimers;
-            // clearTimers = function () {
-            //     clearTimeout(timeOff);
-            //     clearTimeout(heroTackle);
-            //     clearTimeout(heroReturn);
-            //     clearTimeout(attackUp);
-            //     clearTimeout(enemyAttack);
-            //     clearTimeout(enemyTackle);
-            //     clearTimeout(enemyReturn);
-            //     clearTimeout(newTurn);
-
-            //     $('#narrator').text('');
-            //     $('#narrator').append(heroChar.name + ' may now attack again!');
-            //     $("#attack-btn").removeAttr("disabled","disabled");
-            //     $("#attack-btn").removeClass("off");
-            //     $("#attack-btn").addClass("on");
-            // }
-
-                                        //I know there are other ways to do progress bars with text in them. I might do it in the future.
-
-                        // ====================================================================================================
-
-                        // I tried for so long to get the timeout be a variable that I could clear. But all I could ever do was make 
-                        // it anonymous, so I think I never cleared it. 
-
-                        // When I tried to console.log the timer, or the setTimeout, or anything else, it would increment by 8 or 9 each execution
-                        // of the onclick event. The whole thing does not take 8 or 9 secconds, and I was expecting it to be in milliseconds, 
-                        // so it seems like it  was showing something else. I finally gave up but I eventually go it to work with a fix. 
-
-                        // The problem is that the lossCheck() would keep running even after a win condition was satisfied. So on many cases, it 
-                        // would not matter. But if the hero's HP was low enough that a counter-attack would kill him -- even after killing the 
-                        // current opponent -- the hero would die, too. 
-
-                        // My fix was that if the opponent's HP is <= zero, the counter-attack will go through, BUT I add back the HP that 
-                        // the hero lost. It's not perfect, and I will fix the timeouts. 
-
-                                            //             var seconds=0;
-                                            //             var timerName;
-                                            //             var timecount=0;
-                                            // // ======================================================================    
-                                            //             function timeCount()
-                                            //             {
-                                            //                 document.getElementById('heroHP').value=seconds;
-                                            //                 seconds=seconds+1;
-                                            //                 timeName=setTimeout("timeCount()",1000);
-                                            //                     //every 1000ms, add another counter to "seconds"
-                                            //             }
-                                            // // ======================================================================
-                                            //             function startTimer()
-                                            //             {
-                                            //                 if (!timecount)
-                                            //                 {
-                                            //                     timecount=1;
-                                            //                     timeCount();
-                                            //             }
-                                            // // ======================================================================
-                                            //             $("#attack-btn").on("click", function() {
-                                            //                 startTimer();
-                                            //                 });
-
-                        // ====================================================================================================
+            // alert("2");
+                // ^this alerts 1 time on first battleFunc
+                // ^ this alerts 2 times on second battleFunc
 
             $("#attack-btn").bind("click", function () {
-
-                    //I spent 6-7 consecutive hours here
-
+                // alert("3");
+                // ^this alerts just 1 time on the first execution of battleFunc
+                // ^this alerts 3 times on the second execution of battleFunc
                 timeOff = setTimeout(function() {
                     $('#narrator').text('');
                     $('#narrator').append(heroChar.name + "  deals " + heroChar.attackPower + " points of damage!");
@@ -332,34 +290,51 @@
                     heroTackle = setTimeout(function() {
                         $("#heroImg").addClass("heroTackle");
                         $("#enemyDMG").attr("src", "assets/images/boom.png");
-                    }, 1000);
+                        
+                    }, 600);
 
                     heroReturn = setTimeout(function() {
                         $("#enemyDMG").removeAttr("src", "assets/images/boom.png");
                         $("#heroImg").removeClass("heroTackle");
-                        enemyChar.currentHitPoints = enemyChar.currentHitPoints - heroChar.attackPower;
+                        enemyChar.currentHitPoints = (enemyChar.currentHitPoints - heroChar.attackPower);
+                            // console.log(Object.values(enemyChar));
+                            //there are three enemyChars here for some reason.
+                            //the heroChar is attacking all of them, and boosting his attack 3 times
+                            //this is automatically killing the enemyChar in one hit, as 
+                            // the HP bar is changing on each hit of the 3 enemyChar clones that exist somewhere
+
+
+                            // I have tried  the debugger in almost everywhere. I HAVE found that the whole "attackUP" 
+                            // function runs three times, too, not just the attack part of it. it alerts "" three times when I tried it
+
+                            // I think it's because the on-click event on the encounter isn't resetting. So it's 
+                            // counting my first click, then when battleFunc executes encounter again, and I click
+                            // it again, it counts it as two clicks?
+                        
                         $("#enemyHPBar").val(enemyChar.currentHitPoints);
-                        $("#enemyHUD").html("Enemy " + enemyChar.name + "/'s HP: " + enemyChar.currentHitPoints + "/" + enemyChar.hitPoints);
-                    }, 1500);
+                        $("#enemyHUD").html("Enemy " + enemyChar.name + "\'s HP: " + enemyChar.currentHitPoints + "/" + enemyChar.hitPoints);
+                        // console.log(Object.values(heroChar));
+                    }, 1200);
 
                     attackUp = setTimeout(function() {
                         heroChar.attackPower = heroChar.attackPower + heroChar.baseAttackIncrement;
                         $('#narrator').text('');
                         $('#narrator').append(heroChar.name + "'\s attack power increases to " + heroChar.attackPower + "!");
-                    }, 2500);
-
+                        console.log(heroChar.attackPower);
+                        
+                    }, 2200);
 
                     enemyAttack = setTimeout(function() {
                         $('#narrator').text('');
                         $('#narrator').prepend("Enemy ").append(enemyChar.name + " counter-attacks for " + enemyChar.counterAttack +  " damage!");
                         beatEnemyCheck();
                         winCheck();
-                    }, 4000);
+                    }, 3200);
 
                     enemyTackle = setTimeout(function() {
                         $("#enemyImg").addClass("enemyTackle");
                         $("#heroDMG").attr("src", "assets/images/boom.png");
-                    }, 5000);
+                    }, 3700);
 
                     enemyReturn = setTimeout(function() {
                         $("#heroDMG").removeAttr("src", "assets/images/boom.png");
@@ -369,7 +344,7 @@
                         $("#heroHPBar").val(heroChar.currentHitPoints);
                         $("#heroHUD").html(heroChar.name + "/'s HP: " + heroChar.currentHitPoints + "/" + heroChar.hitPoints);
                         lossCheck();
-                    }, 5500);
+                    }, 4300);
 
                     newTurn = setTimeout(function() {
                         $('#narrator').text('');
@@ -378,40 +353,38 @@
                         $("#attack-btn").removeClass("off");
                         $("#attack-btn").addClass("on");
                             //this turns the attack button back on, so you can attack again.
+                    }, 5300);
 
-
-                        clearTimeout(timeOff);
-                        clearTimeout(heroTackle);
-                        clearTimeout(heroReturn);
-                        clearTimeout(attackUp);
-                        clearTimeout(enemyAttack);
-                        clearTimeout(enemyTackle);
-                        clearTimeout(enemyReturn);
+                    test = setTimeout(function() {
+                        // clearTimeout(timeOff);
+                        // clearTimeout(heroTackle);
+                        // clearTimeout(heroReturn);
+                        // clearTimeout(attackUp);
+                        // clearTimeout(enemyAttack);
+                        // clearTimeout(enemyTackle);
+                        // clearTimeout(enemyReturn);
+                        // clearTimeout(newTurn);
                         clearTimeout(newTurn);
-                        // clearTimers();
-                    }, 6500);
-
-alert("3 = " + heroChar.attackPower);
+                    }, 5301);
                 });     //ms can go here
             });     //end of on click       MS CAN GO HERE
+
             lossCheck = function() {
-            if (heroChar.currentHitPoints <= 0 && enemyChar.currentHitPoints >=0) {
-                // clearTimers();
-                hideScenes();
-                $('#winOrLose').html(''); 
-                $('#winOrLose').html('<h1>RESULTS</h1>');
-                $('#winOrLose').removeClass('hidden');
-                $("#winOrLose").addClass('loss');
-                $('#winOrLose').append("<br><br><br><h1>YOU LOST!<br><br> Click anywhere to play again!</h1>");
-                $("#winOrLose").on("click", function() {
-                    location.reload();
-                });
+                if (heroChar.currentHitPoints <= 0 && enemyChar.currentHitPoints >=0) {
+                    hideScenes();
+                    $('#winOrLose').html(''); 
+                    $('#winOrLose').html('<h1>RESULTS</h1>');
+                    $('#winOrLose').removeClass('hidden');
+                    $("#winOrLose").addClass('loss');
+                    $('#winOrLose').append("<br><br><br><h1>YOU LOST!<br><br> Click anywhere to play again!</h1>");
+                    $("#winOrLose").on("click", function() {
+                        location.reload();
+                    });
+                }
             }
-        }
 
         winCheck = function() {
             if (heroChar.currentHitPoints >=0 && characterBulbasaur.chosenOrDefeated == true && characterPorygon2.chosenOrDefeated == true && characterGengar.chosenOrDefeated == true && characterMewtwo.chosenOrDefeated == true ) {
-                // clearTimers();
                 hideScenes();
                 $('#winOrLose').removeClass('hidden');
                 $("#winOrLose").addClass('win');
@@ -421,11 +394,13 @@ alert("3 = " + heroChar.attackPower);
                     location.reload();
                 });
             }
+            else {
+                return;
+            }
         }
 
         beatEnemyCheck = function() {
             if (enemyChar.currentHitPoints <= 0 && heroChar.currentHitPoints >=0) {
-                // clearTimers();
                 heroChar.currentHitPoints = heroChar.currentHitPoints + enemyChar.counterAttack;
             //I do this because the enemy would still attack off-screen even if I defeat him. So the Hero's HP
             // is subtracted in between defeating the enemy and loading the next enemy. 
@@ -437,12 +412,14 @@ alert("3 = " + heroChar.attackPower);
                 $('#winOrLose').html("");
                 $('#winOrLose').html("<h1>RESULTS</h1><br><br><br><h1>You defeated the enemy!<br> Click to keep fighting to defeat the<br> remaining enemies!</h1>");
                 $("#winOrLose").on("click", function() {
-                    // clearTimers();
+
                     getOpponent();
                 });
-            }
-        }
-        }       //end of battle function
+            }//end of if
+
+            
+        }//beatEnemyCheck
+    }//end of battle function
 
 
 
@@ -450,3 +427,68 @@ alert("3 = " + heroChar.attackPower);
     </script>
 </body>
 </html>
+
+<!-- //these are the HP bars
+                
+// var clearTimers;
+// clearTimers = function () {
+//     clearTimeout(timeOff);
+//     clearTimeout(heroTackle);
+//     clearTimeout(heroReturn);
+//     clearTimeout(attackUp);
+//     clearTimeout(enemyAttack);
+//     clearTimeout(enemyTackle);
+//     clearTimeout(enemyReturn);
+//     clearTimeout(newTurn);
+
+//     $('#narrator').text('');
+//     $('#narrator').append(heroChar.name + ' may now attack again!');
+//     $("#attack-btn").removeAttr("disabled","disabled");
+//     $("#attack-btn").removeClass("off");
+//     $("#attack-btn").addClass("on");
+// }
+
+                            //I know there are other ways to do progress bars with text in them. I might do it in the future.
+
+            // ====================================================================================================
+
+            // I tried for so long to get the timeout be a variable that I could clear. But all I could ever do was make 
+            // it anonymous, so I think I never cleared it. 
+
+            // When I tried to console.log the timer, or the setTimeout, or anything else, it would increment by 8 or 9 each execution
+            // of the onclick event. The whole thing does not take 8 or 9 secconds, and I was expecting it to be in milliseconds, 
+            // so it seems like it  was showing something else. I finally gave up but I eventually go it to work with a fix. 
+
+            // The problem is that the lossCheck() would keep running even after a win condition was satisfied. So on many cases, it 
+            // would not matter. But if the hero's HP was low enough that a counter-attack would kill him -- even after killing the 
+            // current opponent -- the hero would die, too. 
+
+            // My fix was that if the opponent's HP is <= zero, the counter-attack will go through, BUT I add back the HP that 
+            // the hero lost. It's not perfect, and I will fix the timeouts. 
+
+                                //             var seconds=0;
+                                //             var timerName;
+                                //             var timecount=0;
+                                // // ======================================================================    
+                                //             function timeCount()
+                                //             {
+                                //                 document.getElementById('heroHP').value=seconds;
+                                //                 seconds=seconds+1;
+                                //                 timeName=setTimeout("timeCount()",1000);
+                                //                     //every 1000ms, add another counter to "seconds"
+                                //             }
+                                // // ======================================================================
+                                //             function startTimer()
+                                //             {
+                                //                 if (!timecount)
+                                //                 {
+                                //                     timecount=1;
+                                //                     timeCount();
+                                //             }
+                                // // ======================================================================
+                                //             $("#attack-btn").on("click", function() {
+                                //                 startTimer();
+                                //                 });
+
+            // ====================================================================================================
+ -->
