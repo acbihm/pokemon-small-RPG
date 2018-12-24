@@ -323,6 +323,7 @@
                         $("#heroImg").addClass("heroTackle");
                         $("#enemyDMG").attr("src", "assets/images/boom.png");
                     }
+
                     setTimeout(heroTackle, 1000);
 
 
@@ -339,7 +340,6 @@
                         heroChar.attackPower = heroChar.attackPower + heroChar.baseAttackIncrement;
                         $('#narrator').text('');
                         $('#narrator').append(heroChar.name + "'\s attack power increases to " + heroChar.attackPower + "!");
-
                     }
                     setTimeout(attackUp, 2500);
 
@@ -355,10 +355,12 @@
 
 
                     function enemyTackle(){
-                        $("enemyImg").addClass("enemyTackle");
+                        $("#enemyImg").addClass("enemyTackle");
                         $("#heroDMG").attr("src", "assets/images/boom.png");
                     }
+
                     setTimeout(enemyTackle, 5000);
+
 
 
                     function enemyReturn(){
@@ -369,7 +371,9 @@
                             $("#heroHPBar").val(heroChar.currentHitPoints);
                             lossCheck();
                         }
+                        // debugger;
                     setTimeout(enemyReturn, 5500);
+                    // debugger;
 
 
                     function newTurn() {
