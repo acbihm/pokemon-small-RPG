@@ -94,7 +94,7 @@ padding-top: 25px;
 
 #arena {
     background-image: url(../images/arenaBG.png);
-    background-position: cover;
+    background-size: cover;
 
 }
 
