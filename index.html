@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="UTF-8">
-    <title>RPG Game</title>
+    <title>Pokémon RPG Game </title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">  
 </head>
 <body>
@@ -15,7 +15,9 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        
+
+// =========     **Below: Available characters Array     ==================================================================
+
         var charBulbasaur = {
             name: "Bulbasaur",
             HP: 110,
@@ -23,8 +25,8 @@
             atk: 8,        
             baseAtk: 14,  
             cAtk: 11,       
-            chosenOrDefeated: false,
-            difficulty: "Easy",       
+            chosenOrDefeated: false,        //*** This makes the character unavilable to battle if it is the player's character or already defeated.
+            // difficulty: "Easy",       
             frontImg: "assets/images/bulbasaur1.gif",
             backImg: "assets/images/bulbasaur2.gif",
             profImg: "assets/images/bulbasaur-profile.png"
@@ -38,7 +40,7 @@
             baseAtk: 18,     
             cAtk: 15,          
             chosenOrDefeated: false,
-            difficulty: "Hard",      
+            // difficulty: "Hard",      
             frontImg: "assets/images/porygon21.gif",
             backImg: "assets/images/porygon22.gif",
             profImg: "assets/images/porygon2-profile.png",
@@ -52,7 +54,7 @@
             baseAtk: 24,     
             cAtk: 21,          
             chosenOrDefeated: false,
-            difficulty: "Very Hard",       
+            // difficulty: "Very Hard",       
             frontImg: "assets/images/gengar1.gif",
             backImg: "assets/images/gengar2.gif",
             profImg: "assets/images/gengar-profile.png"
@@ -66,7 +68,7 @@
             baseAtk: 26,    
             cAtk: 23,         
             chosenOrDefeated: false,
-            difficulty: "Master",
+            // difficulty: "Master",
             frontImg: "assets/images/mewtwo1.gif",
             backImg: "assets/images/mewtwo2.gif",
             profImg: "assets/images/mewtwo-profile.png"
@@ -77,20 +79,23 @@
         char[1] = charPorygon2;
         char[2] = charGengar;
         char[3] = charMewtwo;
-        var enemyChar;          //will have value assigned multiple times
-        var heroChar;           //player's characer
-        var getHero;            //the function that lets player select hero
-        var getOpponent;        //the function that lets player select opponents
-        var encounterFunc;      //the "enemy challenges you" screen
+
+// =========     **Below: Variables for future functions     ==================================================================
+
+        var enemyChar;         
+        var heroChar;           
+        var getHero;            
+        var getEnemy;        
+        var encounterFunc;      
         var battleFunc;         
-        var startTurn;
         var hideScenes;
         var lossCheck;
         var beatEnemyCheck;
         var winCheck;
         var timeOff;
-        var oneInstanceOfBattle;
-        var Object1;            //placeholder/test
+        var battleRunning;      //  ***   This was made to prevent multiple instances of battleFunc from running
+
+// =========     **Below: Function to hide all the scenes     ==================================================================
 
         hideScenes = function() {
             $("#heroSelect").addClass('hidden');
@@ -100,14 +105,14 @@
             $("#results").addClass('hidden');
         }
 
-// ===++++++==++=++===++=+=+++=====++===++++
+// =========     **Below: Function for player to choose hero     ==================================================================
 
         getHero = function() {
             hideScenes();
-            $('#heroSelect').html("<h1>Choose your Pokemon!</h1>");
+            $('#heroSelect').html("<h1>Choose your Pokémon!</h1>");
             $('#heroSelect').removeClass('hidden');
-            oneInstanceOfBattle = false;
-            
+            battleRunning = false;
+                //***   Below: populates the list of characters to choose from.
             for (var i = 0; i <= 3; i++) {
                 var hero = $("<img>");
                 hero.addClass("heroes");
@@ -121,41 +126,40 @@
                 heroChar = char[0];
                 heroChar.chosenOrDefeated = true;
                 hideScenes();
-                getOpponent(heroChar);
+                getEnemy(heroChar);
                 return heroChar;
             });
             $("#heroID1").on("click", function() {
                 heroChar = char[1];
                 heroChar.chosenOrDefeated = true;
                 hideScenes();
-                getOpponent(heroChar);
+                getEnemy(heroChar);
                 return heroChar;
             });
             $("#heroID2").on("click", function() {
                 heroChar = char[2];
                 heroChar.chosenOrDefeated = true;
                 hideScenes();
-                getOpponent(heroChar);
+                getEnemy(heroChar);
                 return heroChar;
             });
             $("#heroID3").on("click", function() {
                 heroChar = char[3];
                 heroChar.chosenOrDefeated = true;
                 hideScenes();
-                getOpponent(heroChar);
+                getEnemy(heroChar);
                 return heroChar;
             });
         }
 
-// ========================================================================================================================
+// =========     **Below: Function for player to choose enemy     ==================================================================
 
-        getOpponent = function(hero, a, b, c) {
+        getEnemy = function(hero, a, b, c) {
             hero = heroChar;
-            $("#heroSelect").html("");
-                //^resets previous scene
+            $("#heroSelect").html("");      //***   Resets previous scene
             hideScenes();
             $('#enemySelect').html("");
-            $('#enemySelect').html("<h1>Choose an opponent!</h1>");      
+            $('#enemySelect').html("<h1>Choose your opponent!</h1>");      
             $('#enemySelect').removeClass('hidden');
             for (var i = 0; i <= 3; i++) {
                 if (char[i].chosenOrDefeated == false){
@@ -197,11 +201,10 @@
             });
         }
 
-// ========================================================================================================================
+// =========     **Below: Function to show "enemy challenges you!"     ==================================================================
 
         encounterFunc = function(enemyForEncounter, ) {
-            $('#enemySelect').html('');
-                //^resets previous scene
+            $('#enemySelect').html('');      //***   Resets previous scene
             $('#encounter').html("<h1 id='encounterWords'></h1><br><img id='encounterImg'>")
             $('#encounter').removeClass('hidden');
             $('#encounterWords').append("Enemy " + enemyChar.name + " challenges you!");
@@ -209,14 +212,13 @@
             $('#encounterImg').after("<br><br><br><br><h1 id='encounterWords'>Click anywhere to battle!</h1>");
             $("#encounter").one("click", function() {
                 hideScenes();
-                if (oneInstanceOfBattle == false) {
+                if (battleRunning == false) {
                     battleFunc(enemyForEncounter);
                 }
-                // $('#encounter').removeAttr("id", "enounter");
             });
         }
 
-// ========================================================================================================================
+// =========     **Below: Function for player to battle enemys     ==================================================================
 
         battleFunc = function(){
             $("#encounter").html("");
@@ -231,71 +233,103 @@
             $("#enemyHPBar").attr("max", enemyChar.HP);
             $("#enemyHPBar").attr("value", enemyChar.currentHP);
             $("#attack-btn").bind("click", function () {
+
+                    //     ***Below: This starts the timer on which the following functions run
                 timeOff = setTimeout(function() {
                     $('#narrator').text('');
                     $('#narrator').append(heroChar.name + "  deals " + heroChar.atk + " points of damage!");
                     $("#attack-btn").attr("disabled","disabled");
                     $("#attack-btn").removeClass("on");
                     $("#attack-btn").addClass("off");
+
+                        //     ***Below: This animates the player's character and adds a "boom" effect
                     heroTackle = setTimeout(function() {
                         $("#heroImg").addClass("heroTackle");
                         $("#enemyDMG").attr("src", "assets/images/boom.png");
-                    }, 600);
-                    heroReturn = setTimeout(function() {
+                    }, 800);
+
+                        //     ***Below: This undoes the animation and "boom" effect, also does damage
+                    heroReturnAndDmg = setTimeout(function() {
                         $("#enemyDMG").removeAttr("src", "assets/images/boom.png");
                         $("#heroImg").removeClass("heroTackle");
                         enemyChar.currentHP = (enemyChar.currentHP - heroChar.atk);
-                        $("#enemyHPBar").val(enemyChar.currentHP);
-                        $("#enemyHUD").html("Enemy " + enemyChar.name + "\'s HP: " + enemyChar.currentHP + "/" + enemyChar.HP);
-                        // console.log(Object.values(heroChar));
+                        if (enemyChar.currentHP <= 0) {
+                            $("#enemyHPBar").val(0);
+                            $("#enemyHUD").html("Enemy " + enemyChar.name + "\'s HP: " + 0 + "/" + enemyChar.HP);
+                        } 
+                        else {
+                            $("#enemyHPBar").val(enemyChar.currentHP);
+                            $("#enemyHUD").html("Enemy " + enemyChar.name + "\'s HP: " + enemyChar.currentHP + "/" + enemyChar.HP);
+                        }
                     }, 1200);
+
+                        //     ***Below: This announces that the player's character attack rises
                     attackUp = setTimeout(function() {
                         heroChar.atk = heroChar.atk + heroChar.baseAtk;
                         $('#narrator').text('');
                         $('#narrator').append(heroChar.name + "'\s attack power increases to " + heroChar.atk + "!");
                         console.log(heroChar.atk);
-                        
                     }, 2200);
+
+                        //     ***Below: This announces the enemy attacking
                     enemyAttack = setTimeout(function() {
                         $('#narrator').text('');
                         $('#narrator').prepend("Enemy ").append(enemyChar.name + " counter-attacks for " + enemyChar.cAtk +  " damage!");
                         beatEnemyCheck();
                         winCheck();
                     }, 3200);
+
+                        //     ***Below: This animates the enemy character and adds a "boom" effect
                     enemyTackle = setTimeout(function() {
                         $("#enemyImg").addClass("enemyTackle");
                         $("#heroDMG").attr("src", "assets/images/boom.png");
-                    }, 3700);
-                    enemyReturn = setTimeout(function() {
+                    }, 3800);
+
+                        //     ***Below: This undoes the animation and "boom" effect, also does damage
+                    enemyReturnAndDmg = setTimeout(function() {
                         $("#heroDMG").removeAttr("src", "assets/images/boom.png");
                         $("#enemyImg").removeClass("enemyTackle");
-                            //this is the enemy damaging the hero and  HP bar lowering to reflect new HP
+                            //***      This is the enemy damaging the hero and  HP bar lowering to reflect new HP
                         heroChar.currentHP = heroChar.currentHP - enemyChar.cAtk;
-                        $("#heroHPBar").val(heroChar.currentHP);
-                        $("#heroHUD").html(heroChar.name + "/'s HP: " + heroChar.currentHP + "/" + heroChar.HP);
-                        lossCheck();
+                        if (heroChar.currentHP <= 0) {
+                            $("#heroHPBar").val(0);
+                            $("#heroHUD").html(heroChar.name + "/'s HP: " + 0 + "/" + heroChar.HP);
+                        } 
+                        else {
+                            $("#heroHPBar").val(heroChar.currentHP);
+                            $("#heroHUD").html(heroChar.name + "/'s HP: " + heroChar.currentHP + "/" + heroChar.HP);
+                        }
+                        // lossCheck();
                     }, 4300);
+                        //     ***Below: I had lossCheck in the above function, but I wanted to display "0 HP" so that the user sees why their character lost (because of 0 HP)
+                    checkLossFunc = setTimeout(function() {
+                        lossCheck();
+                    }, 5000);
+
+                        //     ***Below: This clears the timer, turns the attack button back on
                     newTurn = setTimeout(function() {
                         $('#narrator').text('');
                         $('#narrator').append(heroChar.name + ' may now attack again!');
                         $("#attack-btn").removeAttr("disabled","disabled");
                         $("#attack-btn").removeClass("off");
                         $("#attack-btn").addClass("on");
-                            //this turns the attack button back on, so you can attack again.
+                            //***      This turns the attack button back on, so you can attack again.
                     }, 5300);
-                    test = setTimeout(function() {
+
+                    turn = setTimeout(function() {
                         clearTimeout(newTurn);
                     }, 5301);
-                });     //ms can go here
-            });     //end of on click       MS CAN GO HERE
-        }//end of battle function
 
-// ========================================================================================================================
+                });
+            });     //***      This is the end of the of the on-click event.
+        }       //** This is the end of battleFunc
 
+// =========     **Below: Function to check if player's character has HP still     ==================================================================
+        
         lossCheck = function() {
             if (heroChar.currentHP <= 0 && enemyChar.currentHP >=0) {
                 hideScenes();
-                $('#results').html(''); 
+                $('#results').html('');      //***   Resets previous scene
                 $('#results').html('<h1>RESULTS</h1>');
                 $('#results').removeClass('hidden');
                 $('#results').addClass('loss');
@@ -306,25 +340,7 @@
             }
         }
 
-// ========================================================================================================================
-
-        winCheck = function() {
-            if (heroChar.currentHP >=0 && charBulbasaur.chosenOrDefeated == true && charPorygon2.chosenOrDefeated == true && charGengar.chosenOrDefeated == true && charMewtwo.chosenOrDefeated == true ) {
-                hideScenes();
-                $('#results').removeClass('hidden');
-                $('#results').addClass('win');
-                $('#results').html("");
-                $('#results').html("<h1>RESULTS</h1><br><br><br><h1>You won!<br><br> You defeated EVERY enemy!<br> Click anywhere to play again!</h1>");
-                $('#results').on("click", function() {
-                    location.reload();
-                });
-            }
-            else {
-                return;
-            }
-        }
-
-// ========================================================================================================================
+// =========     **Below: Function to check if the current enemy is defeated by player     ==================================================================
 
         beatEnemyCheck = function() {
             if (enemyChar.currentHP <= 0 && heroChar.currentHP >=0) {
@@ -334,21 +350,36 @@
                 $('#results').removeClass('hidden');
                 $('#results').addClass('win');
                 $('#results').html("");
-                $('#results').html("<h1>RESULTS</h1><br><br><br><h1>You defeated the enemy!<br> Click to keep fighting to defeat the<br> remaining enemies!</h1>");
+                $('#results').html("<h1>RESULTS</h1><br><br><h1>You defeated the enemy!<br><br>Click to keep fighting to defeat the<br> remaining enemies!</h1>");
                 $('#results').on("click", function() {
                     buttt = true;
-                    getOpponent();
+                    getEnemy();
                     return;    
                 });
-            }//end of if
-        }//beatEnemyCheck
+            }      //***     This is the end of the if statement
+        }      //**      End of beatEnemyCheck
 
-// ========================================================================================================================
+// =========     **Below: Function to check if the player has defeated all of the enemies     ==================================================================
+
+winCheck = function() {
+            if (heroChar.currentHP >=0 && charBulbasaur.chosenOrDefeated == true && charPorygon2.chosenOrDefeated == true && charGengar.chosenOrDefeated == true && charMewtwo.chosenOrDefeated == true ) {
+                hideScenes();
+                $('#results').removeClass('hidden');
+                $('#results').addClass('win');
+                $('#results').html("");      //***   Resets previous scene
+                $('#results').html("<h1>RESULTS</h1><br><br><h1>You won!<br><br> You defeated EVERY enemy!<br><br> Click anywhere to play again!</h1>");
+                $('#results').on("click", function() {
+                    location.reload();
+                });
+            }
+            else {
+                return;
+            }
+        }
+
+// =========     **Below: Functions being called     ==================================================================
 
         getHero();
-
-        // getHero();
-        // getOpponent(heroChar);
     </script>
 </body>
 </html>
