@@ -11,7 +11,6 @@ body {
 
 h1, h2, h3, h4 {
     color: white;
-    
 }
 
 h3, h4 {
@@ -80,7 +79,6 @@ padding-top: 25px;
 }
 
 #encounterImg {
-    /* margin: 0 auto; */
     position: relative;
     top: 20px;
     right: -192px;
@@ -172,9 +170,11 @@ padding-top: 25px;
 }
 
 #narrator {
-    position: absolute;
-    top: 393px;
-    left: 165px;
+    /* position: absolute; */
+    /* top: 393px; */
+    /* left: 165px; */
+    text-align: center;
+    margin: 0 auto;
 }
 
 .win {
