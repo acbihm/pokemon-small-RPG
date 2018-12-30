@@ -236,8 +236,8 @@
 
                     //     ***Below: This starts the timer on which the following functions run
                 timeOff = setTimeout(function() {
-                    $('#narrator').text('');
-                    $('#narrator').append(heroChar.name + "  deals " + heroChar.atk + " points of damage!");
+                    $('#narrator').html('');
+                    $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>' + heroChar.name + "  deals " + heroChar.atk + " points of damage!");
                     $("#attack-btn").attr("disabled","disabled");
                     $("#attack-btn").removeClass("on");
                     $("#attack-btn").addClass("off");
@@ -266,15 +266,16 @@
                         //     ***Below: This announces that the player's character attack rises
                     attackUp = setTimeout(function() {
                         heroChar.atk = heroChar.atk + heroChar.baseAtk;
-                        $('#narrator').text('');
-                        $('#narrator').append(heroChar.name + "'\s attack power increases to " + heroChar.atk + "!");
+                        $('#narrator').html('');
+                        //     ***Below: I didn't wanna do this. I previously had the text positioned using "left" and "top". But since then, I centered the text, and now I am using <br> to place it in the same spot.
+                        $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>' + heroChar.name + "'\s attack power increases to " + heroChar.atk + "!");
                         console.log(heroChar.atk);
                     }, 2200);
 
                         //     ***Below: This announces the enemy attacking
                     enemyAttack = setTimeout(function() {
-                        $('#narrator').text('');
-                        $('#narrator').prepend("Enemy ").append(enemyChar.name + " counter-attacks for " + enemyChar.cAtk +  " damage!");
+                        $('#narrator').html('');
+                        $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Enemy' + enemyChar.name + " counter-attacks for " + enemyChar.cAtk +  " damage!");
                         beatEnemyCheck();
                         winCheck();
                     }, 3200);
@@ -309,8 +310,8 @@
 
                         //     ***Below: This clears the timer, turns the attack button back on
                     newTurn = setTimeout(function() {
-                        $('#narrator').text('');
-                        $('#narrator').append(heroChar.name + ' may now attack again!');
+                        $('#narrator').html('');
+                        $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>' + heroChar.name + ' may now attack again!');
                         $("#attack-btn").removeAttr("disabled","disabled");
                         $("#attack-btn").removeClass("off");
                         $("#attack-btn").addClass("on");
