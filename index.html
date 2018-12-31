@@ -226,8 +226,8 @@
             $("#arena").html("<div><h3 id='enemyHUD'></h3><progress id='enemyHPBar'></progress><img id='enemyImg'><img id='enemyDMG'></div><div><h3 id='heroHUD'> </h3><progress id='heroHPBar'></progress><img id='heroImg'><img id='heroDMG'><button id='attack-btn' class='on'>ATTACK</button><h4 id='narrator'></h4></div>");
             $("#enemyImg").attr("src", enemyChar.frontImg);
             $("#heroImg").attr("src", heroChar.backImg);
-            $("#enemyHUD").html("Enemy " + enemyChar.name + "'\s HP: " + enemyChar.currentHP + "/" + enemyChar.HP);
-            $("#heroHUD").html(heroChar.name + "'\s HP: " + heroChar.currentHP + "/" + heroChar.HP);
+            $("#enemyHUD").html("Enemy " + enemyChar.name + "/'s HP: " + enemyChar.currentHP + "/" + enemyChar.HP);
+            $("#heroHUD").html(heroChar.name + "/'s HP: " + heroChar.currentHP + "/" + heroChar.HP);
             $("#heroHPBar").attr("max", heroChar.HP);
             $("#heroHPBar").attr("value", heroChar.currentHP);
             $("#enemyHPBar").attr("max", enemyChar.HP);
@@ -236,8 +236,8 @@
 
                     //     ***Below: This starts the timer on which the following functions run
                 timeOff = setTimeout(function() {
-                    $('#narrator').html('');
-                    $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>' + heroChar.name + "  deals " + heroChar.atk + " points of damage!");
+                    $('#narrator').text('');
+                    $('#narrator').append(heroChar.name + "  deals " + heroChar.atk + " points of damage!");
                     $("#attack-btn").attr("disabled","disabled");
                     $("#attack-btn").removeClass("on");
                     $("#attack-btn").addClass("off");
@@ -255,27 +255,26 @@
                         enemyChar.currentHP = (enemyChar.currentHP - heroChar.atk);
                         if (enemyChar.currentHP <= 0) {
                             $("#enemyHPBar").val(0);
-                            $("#enemyHUD").html("Enemy " + enemyChar.name + "'\s HP: " + 0 + "/" + enemyChar.HP);
+                            $("#enemyHUD").html("Enemy " + enemyChar.name + "\'s HP: " + 0 + "/" + enemyChar.HP);
                         } 
                         else {
                             $("#enemyHPBar").val(enemyChar.currentHP);
-                            $("#enemyHUD").html("Enemy " + enemyChar.name + "'\s HP: " + enemyChar.currentHP + "/" + enemyChar.HP);
+                            $("#enemyHUD").html("Enemy " + enemyChar.name + "\'s HP: " + enemyChar.currentHP + "/" + enemyChar.HP);
                         }
                     }, 1200);
 
                         //     ***Below: This announces that the player's character attack rises
                     attackUp = setTimeout(function() {
                         heroChar.atk = heroChar.atk + heroChar.baseAtk;
-                        $('#narrator').html('');
-                        //     ***Below: I didn't wanna do this. I previously had the text positioned using "left" and "top". But since then, I centered the text, and now I am using <br> to place it in the same spot.
-                        $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>' + heroChar.name + "'\s attack power increases to " + heroChar.atk + "!");
+                        $('#narrator').text('');
+                        $('#narrator').append(heroChar.name + "'\s attack power increases to " + heroChar.atk + "!");
                         console.log(heroChar.atk);
                     }, 2200);
 
                         //     ***Below: This announces the enemy attacking
                     enemyAttack = setTimeout(function() {
-                        $('#narrator').html('');
-                        $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Enemy' + enemyChar.name + " counter-attacks for " + enemyChar.cAtk +  " damage!");
+                        $('#narrator').text('');
+                        $('#narrator').prepend("Enemy ").append(enemyChar.name + " counter-attacks for " + enemyChar.cAtk +  " damage!");
                         beatEnemyCheck();
                         winCheck();
                     }, 3200);
@@ -294,15 +293,14 @@
                         heroChar.currentHP = heroChar.currentHP - enemyChar.cAtk;
                         if (heroChar.currentHP <= 0) {
                             $("#heroHPBar").val(0);
-                            $("#heroHUD").html(heroChar.name + "'\s HP: " + 0 + "/" + heroChar.HP);
+                            $("#heroHUD").html(heroChar.name + "/'s HP: " + 0 + "/" + heroChar.HP);
                         } 
                         else {
                             $("#heroHPBar").val(heroChar.currentHP);
-                            $("#heroHUD").html(heroChar.name + "'\s HP: " + heroChar.currentHP + "/" + heroChar.HP);
+                            $("#heroHUD").html(heroChar.name + "/'s HP: " + heroChar.currentHP + "/" + heroChar.HP);
                         }
                         // lossCheck();
                     }, 4300);
-                    
                         //     ***Below: I had lossCheck in the above function, but I wanted to display "0 HP" so that the user sees why their character lost (because of 0 HP)
                     checkLossFunc = setTimeout(function() {
                         lossCheck();
@@ -310,8 +308,8 @@
 
                         //     ***Below: This clears the timer, turns the attack button back on
                     newTurn = setTimeout(function() {
-                        $('#narrator').html('');
-                        $('#narrator').append('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>' + heroChar.name + ' may now attack again!');
+                        $('#narrator').text('');
+                        $('#narrator').append(heroChar.name + ' may now attack again!');
                         $("#attack-btn").removeAttr("disabled","disabled");
                         $("#attack-btn").removeClass("off");
                         $("#attack-btn").addClass("on");
