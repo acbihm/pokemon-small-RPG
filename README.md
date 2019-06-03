@@ -1,2 +1,2 @@
-# unit-4-game
+# Pokemon Small RPG
 jQuery RPG Game
